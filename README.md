@@ -6,6 +6,10 @@
 
 Versión: 18 de Enero de 2021
 
+## Título
+
+MIGRACIÓN DE PLATAFORMA DE CONCIENCIA CIBERSITUACIONAL A ENTORNO DOCKER SECURIZADO
+
 ## Descripción y objetivo del TFG
 
 Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de la Universidad Politécnica de Madrid, con orquestación del despliegue con Docker-Compose, identificación de dependencias entre contenedores y securización de comunicación entre estos.
