@@ -14,5 +14,8 @@ MIGRACIÓN DE PLATAFORMA DE CONCIENCIA CIBERSITUACIONAL A ENTORNO DOCKER SECURIZ
 
 Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de la Universidad Politécnica de Madrid, con orquestación del despliegue con Docker-Compose, identificación de dependencias entre contenedores y securización de comunicación entre estos.
 
+## Partes del proyecto
+
+  - Directorio kafka, que contiene el dockerfile y dockercompose para montar apache Kafka y Zookeper con SSL
 
 
