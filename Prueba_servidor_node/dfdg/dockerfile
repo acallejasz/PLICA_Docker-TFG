@@ -1,0 +1,6 @@
+
+FROM ubuntu
+
+WORKDIR /tpm/lapera
+
+COPY . .
