@@ -16,6 +16,6 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
 
 ## Partes del proyecto
 
-  - Directorio kafka, que contiene el dockerfile y dockercompose para montar apache Kafka y Zookeper con SSL
+  - Directorio Kafka-ZooKeeper, que contiene el dockerfile y dockercompose para levantar apache Kafka y Zookeper con SSL y bastionado
 
 
