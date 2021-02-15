@@ -17,8 +17,7 @@ RUN apk add --no-cache wget bash \
     | tar -xzC ${ZK_HOME} --strip-components=1 \
  && mv ${ZK_HOME}/conf/zoo_sample.cfg ${ZK_HOME}/conf/zoo.cfg \
  && mkdir -p /tmp/zookeeper \
- &&	sed -i "s|/tmp/zookeeper|${ZK_HOME}/data|g" ${ZK_HOME}/conf/zoo.cfg; mkdir ${ZK_HOME}/data \
- &&	sed -i -r 's|#(log4j.appender.ROLLINGFILE.MaxBackupIndex.*)|\1|g' ${ZK_HOME}/conf/log4j.properties \
+ &&	sed -i "s|/tmp/zookeeper|${ZK_HOME}/data|g" ${ZK_HOME}/conf/zoo.cfg; mkdir ${ZK_HOME}/data \ \
  &&	sed -i -r 's|#autopurge|autopurge|g' ${ZK_HOME}/conf/zoo.cfg
 
 EXPOSE 2181 2888 3888

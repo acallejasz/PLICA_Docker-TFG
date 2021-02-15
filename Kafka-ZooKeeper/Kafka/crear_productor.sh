@@ -20,14 +20,4 @@ zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddres
 
 declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "PF-DATA" "UBA-DATA")
 
-## now loop through the above array
-for i in "${topics[@]}"
-do
-	# Creacion de topics desde Kafka instalado en local
-	#sudo ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic "$i"
-	# Creacion de topics desde Kafka instlado en docker (modificar el nombre del contenedor y la IP de zookeeper correspondiente)
-	sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --create --zookeeper $zookeeper_ip:2181 --replication-factor 1 --partitions 1 --topic "$i"  --config retention.ms=5000
-
-done
-
-sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --list --zookeeper $zookeeper_ip:2181
+sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-console-producer.sh --topic "WF-DATA" --bootstrap-server 192.168.99.100:9092
