@@ -14,7 +14,7 @@
 # Se opta por el filtrado referenciado a su imagen base
 
 #kafka_id=$(docker ps -q --filter "expose=9092")
-kafka_id=$(docker ps -q --filter "ancestor=acallejasz/kafka")
+kafka_id=$(docker ps -q --filter "name=kafka_kafka_1")
 zookeeper_id=$(docker ps -q --filter "expose=2181")
 zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $zookeeper_id)
 
@@ -30,4 +30,7 @@ do
 
 done
 
-sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --list --zookeeper $zookeeper_ip:2181
+mapfile -t all_topics < <(sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --list --zookeeper $zookeeper_ip:2181)
+
+printf "La lista de todos los topics es:"
+printf "%s\n" "${all_topics[@]}"

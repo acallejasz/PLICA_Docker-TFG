@@ -14,7 +14,7 @@
 # Se opta por el filtrado referenciado a su imagen base
 
 #kafka_id=$(docker ps -q --filter "expose=9092")
-kafka_id=$(docker ps -q --filter "ancestor=acallejasz/kafka")
+kafka_id=$(docker ps -q --filter "name=kafka_kafka_1")
 zookeeper_id=$(docker ps -q --filter "expose=2181")
 zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $zookeeper_id)
 
