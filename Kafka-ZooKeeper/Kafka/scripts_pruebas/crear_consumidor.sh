@@ -5,12 +5,10 @@
 
 #!/bin/bash
 
-# Creación de contenedor kafka pra hacer de productor
-# Se opta por el filtrado referenciado al nombre del contenedor
+# Creación de contenedor kafka para hacer de consumidorr
 # Se introduce manualmente el topic al que se quiere conectar
 
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name consumer -i -t wurstmeister/kafka
+broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+port=$(docker inspect kafka-docker_kafka_1 | grep HostPort | sort | uniq | grep -o [0-9]*)
 
-kafka_id=$(docker ps -q --filter "name=consumer")
-
-sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-console-consumer.sh --topic=$2 --from-beginning --bootstrap-server=`broker-list.sh`
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name consumer -i -t wurstmeister/kafka /opt/kafka/bin/kafka-console-consumer.sh --topic=$2 --from-beginning --bootstrap-server=$broker_ip:$port

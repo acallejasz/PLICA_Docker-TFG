@@ -9,8 +9,7 @@
 # Se opta por el filtrado referenciado al nombre del contenedor
 # Se introduce manualmente el topic al que se quiere conectar
 
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name producer -i -t wurstmeister/kafka
+broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)
+port=$(docker inspect kafka-docker_kafka_1 | grep HostPort | sort | uniq | grep -o [0-9]*)
 
-kafka_id=$(docker ps -q --filter "name=producer")
-
-sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-console-producer.sh --topic=$2 --bootstrap-server=`broker-list.sh`
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name producer -i -t wurstmeister/kafka /opt/kafka/bin/kafka-console-producer.sh --topic=$2 --bootstrap-server=$broker_ip:$port
