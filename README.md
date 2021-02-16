@@ -4,7 +4,7 @@
 
 # Repositorio para los archivos y pruebas Docker de mi TFG
 
-Versión: 18 de Enero de 2021
+Versión: 16 de Febrero de 2021
 
 ## Título
 
@@ -17,5 +17,10 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
 ## Partes del proyecto
 
   - Directorio Kafka-ZooKeeper, que contiene el dockerfile y dockercompose para levantar apache Kafka y Zookeper con SSL y bastionado
+  - Directorio Spark-Hadoop, que contiene el dockerfile y dockercompose para levantar apache Spark y Hadoop con bastionado
 
+## Kafka + Zookeper
 
+Para este módulo hay que configurar el docker-compose para crear la network PLICA en la que la ip del gateway debe coincidir con el ADVERTISED_HOST_NAME de modo que se levantan estos dos contenedores y se pueden usar los scripts para crear topics, productores o consumidores. Estos dos últimos requieren de dos parámetros: El primero de ellos la ip del host, que es la del gateway de la network, y el segundo el nombre del topic al que queremos conectarnos.
+
+Si se quieren utilizar múltiples brokers se debe quitar el mapeo de puertos del docker-file para kafka, en los scripts de productor y consumidor sustituir como bootstrap-server=`broker-list.sh` y desplegar el contenedor como docker--compose up --scale kafka=numero_brokers -d
