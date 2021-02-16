@@ -4,7 +4,7 @@
 
 # Repositorio para los archivos y pruebas Docker de mi TFG
 
-Versión: 18 de Enero de 2021
+Versión: 16 de Febrero de 2021
 
 ## Título
 
