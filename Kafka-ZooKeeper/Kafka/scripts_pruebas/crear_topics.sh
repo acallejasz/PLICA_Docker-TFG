@@ -13,7 +13,7 @@
 # Filtrado por puertos expuestos, kafka comparte puerto con el conector de elastic
 # Se opta por el filtrado referenciado a su imagen base
 
-kafka_id=$(docker ps -q --filter "name=kafka-docker_kafka_1")
+kafka_id=$(docker ps -q --filter "name=kafka")
 zookeeper_id=$(docker ps -q --filter "expose=2181")
 zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $zookeeper_id)
 

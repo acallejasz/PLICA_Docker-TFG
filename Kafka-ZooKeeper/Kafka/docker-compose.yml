@@ -3,6 +3,8 @@ services:
 
   zookeeper:
     image: acallejasz/zookeeper
+    container_name:
+      - zookeeper
     networks:
       - PLICA
     ports:
@@ -10,6 +12,8 @@ services:
 
   kafka:
     image: acallejasz/kafka
+    container_name:
+      - kafka
     ports:
       - "9092:9092"
     environment:
