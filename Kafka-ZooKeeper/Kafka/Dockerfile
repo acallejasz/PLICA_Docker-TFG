@@ -1,3 +1,5 @@
+#Dockerfile for Kafka
+
 FROM openjdk:8u212-jre-alpine
 
 ARG kafka_version=2.7.0
@@ -16,7 +18,11 @@ ENV KAFKA_VERSION=$kafka_version \
     GLIBC_VERSION=$glibc_version \
     PATH=${PATH}:${KAFKA_HOME}/bin
 
+#Installation and config scripts
+
 COPY start-kafka.sh broker-list.sh create-topics.sh versions.sh /tmp/
+
+#Install and config
 
 RUN apk add --no-cache bash docker \
  && chmod a+x /tmp/*.sh \
