@@ -1,3 +1,5 @@
+#Dockerfile for Zookeeper
+
 FROM openjdk:8-jre-alpine
 
 ARG zookeeper_version=3.5.9
@@ -10,6 +12,8 @@ LABEL org.label-schema.name="zookeeper" \
 
 ENV ZOOKEEPER_VERSION=$zookeeper_version \
 	ZK_HOME=/opt/zookeeper
+
+#Install and config 
 
 RUN apk add --no-cache wget bash \
  && mkdir -p ${ZK_HOME} \
