@@ -16,11 +16,11 @@ ENV KAFKA_VERSION=$kafka_version \
     GLIBC_VERSION=$glibc_version \
     PATH=${PATH}:${KAFKA_HOME}/bin
 
-COPY start-kafka.sh broker-list.sh create-topics.sh /tmp/
+COPY start-kafka.sh broker-list.sh create-topics.sh versions.sh /tmp/
 
 RUN apk add --no-cache bash docker \
  && chmod a+x /tmp/*.sh \
- && mv /tmp/start-kafka.sh /tmp/broker-list.sh /tmp/create-topics.sh /usr/bin \
+ && mv /tmp/start-kafka.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /usr/bin \
  && sync && wget https://ftp.cixug.es/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt \
  && rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
