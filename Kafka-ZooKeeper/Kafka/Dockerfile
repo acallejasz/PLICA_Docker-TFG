@@ -24,7 +24,7 @@ COPY start-kafka.sh broker-list.sh create-topics.sh versions.sh /tmp/
 
 #Install and config
 
-RUN apk add --no-cache bash openssl docker \
+RUN apk add --no-cache openssl bash docker \
  && chmod a+x /tmp/*.sh \
  && mv /tmp/start-kafka.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /usr/bin \
  && sync && wget https://ftp.cixug.es/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
