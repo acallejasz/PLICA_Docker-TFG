@@ -11,24 +11,29 @@ LABEL org.label-schema.name="zookeeper" \
       maintainer="acallejasz"
 
 ENV ZOOKEEPER_VERSION=$zookeeper_version \
-	ZK_HOME=/opt/zookeeper
+	ZK_HOME=/opt/zookeeper 
+
+COPY zookeeper_jaas.conf zookeeper-ssl.sh zkEnv.sh zoo.cfg /tmp/
 
 #Install and config 
 
-RUN apk add --no-cache wget bash \
+RUN apk add --no-cache wget openssl bash \
  && mkdir -p ${ZK_HOME} \
+ && chmod a+x /tmp/*.sh \
+ && mv /tmp/zookeeper-ssl.sh /tmp/zookeeper_jaas.conf /tmp/zkEnv.sh /tmp/zoo.cfg ${ZK_HOME} \
  && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz \
     | tar -xzC ${ZK_HOME} --strip-components=1 \
- && mv ${ZK_HOME}/conf/zoo_sample.cfg ${ZK_HOME}/conf/zoo.cfg \
+ && mv ${ZK_HOME}/zoo.cfg ${ZK_HOME}/conf/zoo.cfg \
+ && rm -f ${ZK_HOME}/bin/zkEnv.sh \
+ && mv ${ZK_HOME}/zkEnv.sh ${ZK_HOME}/bin/zkEnv.sh \
  && mkdir -p /tmp/zookeeper \
- &&	sed -i "s|/tmp/zookeeper|${ZK_HOME}/data|g" ${ZK_HOME}/conf/zoo.cfg; mkdir ${ZK_HOME}/data \
- &&	sed -i -r 's|#autopurge|autopurge|g' ${ZK_HOME}/conf/zoo.cfg
+ &&	mkdir ${ZK_HOME}/data \
+ && mkdir -p /var/ssl \
+ && ${ZK_HOME}/zookeeper-ssl.sh
 
-EXPOSE 2181 2888 3888
+EXPOSE 2181 2281 2888 3888
 
 WORKDIR ${ZK_HOME}
-
-VOLUME ["/opt/zookeeper/conf", "/opt/zookeeper/data"]
 
 ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
 
