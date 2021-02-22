@@ -143,7 +143,7 @@ echo "" >> "$KAFKA_HOME/config/server.properties"
 
     # SSL configuration 
 
-        # Zookeeper config
+        # Zookeeper config    
 
     updateConfig "authProvider.1" "org.apache.zookeeper.server.auth.SASLAuthenticationProvider" "$KAFKA_HOME/config/zookeeper.properties"
     updateConfig "requireClientAuthScheme" "sasl" "$KAFKA_HOME/config/zookeeper.properties"

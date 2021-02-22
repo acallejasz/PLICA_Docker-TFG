@@ -2,7 +2,6 @@ version: '3.9'
 services:
 
   zookeeper:
-    build: ../ZooKeeper/.
     image: acallejasz/zookeeper
     container_name: zookeeper
     networks:
@@ -13,7 +12,7 @@ services:
     volumes:
       - certs-zookeeper:/var/ssl/private  
 
-  kafka:
+  kafka1:
     build: .
     image: acallejasz/kafka
     container_name: kafka
@@ -24,13 +23,14 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
     networks:
       PLICA:
-        ipv4_address: 172.20.0.10
+        ipv4_address: 172.20.0.2
     depends_on: 
       - zookeeper
     volumes:
       - certs-zookeeper:/var/ssl/private/zookeeper
       - certs-kafka:/var/ssl/private/kafka
       - kafka_config:/opt/kafka/config
+      - /var/run/docker.sock:/var/run/docker.sock       
 
 networks:
   PLICA:

@@ -12,21 +12,39 @@ services:
     volumes:
       - certs-zookeeper:/var/ssl/private  
 
-  kafka:
+  kafka1:
     image: acallejasz/kafka
     ports:
-      - "9093"
+      - "9093:9093"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
     networks:
       PLICA:
+         ipv4_address: 172.20.0.2
     depends_on: 
       - zookeeper
     volumes:
       - certs-zookeeper:/var/ssl/private/zookeeper
       - certs-kafka:/var/ssl/private/kafka
       - kafka_config:/opt/kafka/config
+
+  kafka2:
+    image: acallejasz/kafka
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
+    networks:
+      PLICA:
+         ipv4_address: 172.20.0.3
+    depends_on: 
+      - zookeeper
+    volumes:
+      - certs-zookeeper:/var/ssl/private/zookeeper
+      - certs-kafka:/var/ssl/private/kafka
+      - kafka_config:/opt/kafka/config    
 
 networks:
   PLICA:
