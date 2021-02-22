@@ -16,7 +16,7 @@ if [[ -z "$KAFKA_ZOOKEEPER_CONNECT" ]]; then
 fi
 
 if [[ -z "$KAFKA_PORT" ]]; then
-    export KAFKA_PORT=9092
+    export KAFKA_PORT=9093
 fi
 
 create-topics.sh &
@@ -140,7 +140,49 @@ echo "" >> "$KAFKA_HOME/config/server.properties"
             updateConfig "$log4j_name" "${!env_var}" "$KAFKA_HOME/config/log4j.properties"
         fi
     done
+
+    # SSL configuration 
+
+        # Zookeeper config
+
+    updateConfig "authProvider.1" "org.apache.zookeeper.server.auth.SASLAuthenticationProvider" "$KAFKA_HOME/config/zookeeper.properties"
+    updateConfig "requireClientAuthScheme" "sasl" "$KAFKA_HOME/config/zookeeper.properties"
+    updateConfig "maxClientCnxns" "0" "$KAFKA_HOME/config/zookeeper.properties"
+    updateConfig "jaasLoginRenew" "3600000" "$KAFKA_HOME/config/zookeeper.properties"
+    updateConfig "zookeeper.ssl.endpoint.identification.algorithm" "" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.client.enable" "true" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.client.secure" "true" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.clientCnxnSocket" "org.apache.zookeeper.ClientCnxnSocketNetty" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.keystore.location" "/var/ssl/private/zookeeper/zookeeper.server.keystore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.keystore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.truststore.location" "/var/ssl/private/zookeeper/zookeeper.server.truststore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.truststore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+
+        # Enable SSL security protocol for inter-broker communication
+        # Enable SASL_SSL security protocol for broker-client communication
+
+    updateConfig "listeners" "PLAINTEXT://:9092,SSL://:9093,SASL_SSL://:9094" "$KAFKA_HOME/config/server.properties"
+    updateConfig "advertised.listeners" "PLAINTEXT://$KAFKA_ADVERTISED_HOST_NAME:9092,SSL://$KAFKA_ADVERTISED_HOST_NAME:9093,SASL_SSL://$KAFKA_ADVERTISED_HOST_NAME:9094" "$KAFKA_HOME/config/server.properties"
+    updateConfig "security.inter.broker.protocol" "SSL" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.endpoint.identification.algorithm" """" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.client.auth" "required" "$KAFKA_HOME/config/server.properties"
+
+        # Broker security settings
+
+    updateConfig "ssl.truststore.location" "/var/ssl/private/kafka/kafka.server.truststore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.truststore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.keystore.location" "/var/ssl/private/kafka/kafka.server.keystore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.keystore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.key.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "sasl.enabled.mechanisms" "PLAIN" "$KAFKA_HOME/config/server.properties"
+    updateConfig "sasl.mechanism.inter.broker.protocol" "PLAIN" "$KAFKA_HOME/config/server.properties"
+    updateConfig "authorizer.class.name" "kafka.security.auth.SimpleAclAuthorizer" "$KAFKA_HOME/config/server.properties"
+    updateConfig "allow.everyone.if.no.acl.found" "true" "$KAFKA_HOME/config/server.properties"
+    updateConfig "super.users" "User:admin" "$KAFKA_HOME/config/server.properties"
 )
+
+export KAFKA_OPTS="-Djava.security.auth.login.config=/usr/bin/kafka_server_jaas.conf"
+
 
 if [[ -n "$CUSTOM_INIT_SCRIPT" ]] ; then
   eval "$CUSTOM_INIT_SCRIPT"

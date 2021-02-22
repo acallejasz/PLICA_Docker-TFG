@@ -9,22 +9,26 @@ services:
         ipv4_address: 172.20.0.11
     ports:
       - "2181:2181"
+    volumes:
+      - certs-zookeeper:/var/ssl/private  
 
   kafka:
     image: acallejasz/kafka
     container_name: kafka
     ports:
-      - "9092:9092"
+      - "9093:9093"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
     networks:
       PLICA:
         ipv4_address: 172.20.0.10
     depends_on: 
       - zookeeper
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - certs-zookeeper:/var/ssl/private/zookeeper
+      - certs-kafka:/var/ssl/private/kafka
+      - kafka_config:/opt/kafka/config
 
 networks:
   PLICA:
@@ -34,3 +38,8 @@ networks:
       config:
         - subnet: 172.20.0.0/24
           gateway: 172.20.0.1
+
+volumes:
+  certs-zookeeper: 
+  certs-kafka:
+  kafka_config:        
