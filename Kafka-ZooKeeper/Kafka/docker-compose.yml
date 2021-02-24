@@ -21,7 +21,6 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
-      KAFKA_BROKERS_NUMBER: 3
     networks:
       PLICA:
         ipv4_address: 172.20.0.2

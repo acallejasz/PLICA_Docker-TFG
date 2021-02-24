@@ -5,6 +5,7 @@ FROM openjdk:8u212-jre-alpine
 ARG kafka_version=2.7.0
 ARG scala_version=2.13
 ARG glibc_version=2.31-r0
+ARG brokers_number=3
 
 LABEL org.label-schema.name="kafka" \
       org.label-schema.description="Apache Kafka" \
@@ -16,6 +17,7 @@ ENV KAFKA_VERSION=$kafka_version \
     SCALA_VERSION=$scala_version \
     KAFKA_HOME=/opt/kafka \
     GLIBC_VERSION=$glibc_version \
+    BROKERS_NUMBER=$brokers_number \
     PATH=${PATH}:${KAFKA_HOME}/bin
 
 #Installation and config scripts

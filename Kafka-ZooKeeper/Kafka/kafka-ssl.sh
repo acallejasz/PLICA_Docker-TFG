@@ -3,11 +3,9 @@
 set -eu
 
 KEYSTORE_FILENAME="kafka.server.keystore.jks"
-#KEYSTORE_BROKER_FILENAME="kafka.broker.keystore.jks"
 KEYSTORE_CLIENT_FILENAME="kafka.client.keystore.jks"
 VALIDITY_IN_DAYS=3650
 DEFAULT_TRUSTSTORE_FILENAME="kafka.server.truststore.jks"
-#DEFAULT_BROKER_TRUSTSTORE_FILENAME="kafka.broker.truststore.jks"
 DEFAULT_CLIENT_TRUSTSTORE_FILENAME="kafka.client.truststore.jks"
 TRUSTSTORE_WORKING_DIRECTORY="/var/ssl/private/kafka"
 KEYSTORE_WORKING_DIRECTORY="/var/ssl/private/kafka"
@@ -16,7 +14,7 @@ KEYSTORE_SIGN_REQUEST="cert-file-kafka"
 KEYSTORE_SIGN_REQUEST_SRL="ca-cert-kafka.srl"
 KEYSTORE_SIGNED_CERT="cert-signed-kafka"
 KAFKA_ADVERTISED_HOST_NAME=172.20.0.1
-KAFKA_BROKERS_NUMBER=5
+KAFKA_BROKERS_NUMBER=$BROKERS_NUMBER
 
 COUNTRY=es
 STATE=Madrid
