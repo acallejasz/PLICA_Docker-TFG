@@ -22,20 +22,20 @@ ENV KAFKA_VERSION=$kafka_version \
 
 #Installation and config scripts
 
-COPY start-kafka.sh start-broker.sh broker-list.sh create-topics.sh versions.sh kafka-ssl.sh kafka_server_jaas.conf consumer_ssl.properties producer_ssl.properties /tmp/
+COPY start-kafka.sh start-broker.sh broker-list.sh create-topics.sh versions.sh kafka_certs.sh kafka_server_jaas.conf consumer_ssl.properties producer_ssl.properties /tmp/
 
 #Install and config
 
 RUN apk add --no-cache bash openssl docker \
  && chmod a+x /tmp/*.sh \
- && mv /tmp/start-kafka.sh /tmp/start-broker.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /tmp/kafka-ssl.sh /tmp/kafka_server_jaas.conf /usr/bin \
+ && mv /tmp/start-kafka.sh /tmp/start-broker.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /tmp/kafka_certs.sh /tmp/kafka_server_jaas.conf /usr/bin \
  && sync && wget https://ftp.cixug.es/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && tar xfz /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt \
  && rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} \
  && mv /tmp/consumer_ssl.properties /tmp/producer_ssl.properties ${KAFKA_HOME}/config \
  && mkdir -p /var/ssl/private \
- && /usr/bin/kafka-ssl.sh \
+ && /usr/bin/kafka_certs.sh \
  && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
  && apk add --no-cache --allow-untrusted glibc-${GLIBC_VERSION}.apk \
  && rm glibc-${GLIBC_VERSION}.apk
