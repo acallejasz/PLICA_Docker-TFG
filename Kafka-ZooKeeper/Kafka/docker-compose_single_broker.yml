@@ -12,17 +12,18 @@ services:
     volumes:
       - certs-zookeeper:/var/ssl/private  
 
-  kafka1:
+  kafka:
+    build: .
     image: acallejasz/kafka
-    container_name: kafka1
+    container_name: kafka
     ports:
-      - "9093"
+      - "9093:9093"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
     networks:
       PLICA:
-        #ipv4_address: 172.20.0.2
+        ipv4_address: 172.20.0.2
     depends_on: 
       - zookeeper
     volumes:
@@ -30,30 +31,6 @@ services:
       - certs-kafka:/var/ssl/private/kafka
       - kafka_config:/opt/kafka/config
       - /var/run/docker.sock:/var/run/docker.sock
-
-  kafka2:
-    image: acallejasz/kafka
-    container_name: kafka2
-    ports:
-      - "9096:9096"
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
-      KAFKA_PORT: 9096
-      KAFKA_ADVERTISED_PORT: 9096
-      KAFKA_LISTENERS: PLAINTEXT://:9095,SSL://:9096,SASL_SSL://:9097
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.20.0.1:9095,SSL://172.20.0.1:9096,SASL_SSL://172.20.0.1:9097
-    networks:
-      PLICA:
-        ipv4_address: 172.20.0.3
-    depends_on: 
-      - zookeeper
-      - kafka1
-    volumes:
-      - certs-zookeeper:/var/ssl/private/zookeeper
-      - certs-kafka:/var/ssl/private/kafka
-      - kafka_config:/opt/kafka/config
-      - /var/run/docker.sock:/var/run/docker.sock    
 
 networks:
   PLICA:

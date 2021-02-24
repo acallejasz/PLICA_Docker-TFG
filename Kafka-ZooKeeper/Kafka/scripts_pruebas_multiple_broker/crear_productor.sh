@@ -11,6 +11,6 @@
 # Cuando se ejecute el script indicar como primer parámetro el HOST_ADVERTISED_NAME (Que debe ser al gateway de la network definida en el compose) y como segundo el topic a usar de los creados
 
 broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafka_PLICA)
-port=$(docker inspect kafka_kafka_2 | grep HostPort | sort | uniq | grep -o [0-9]*)
+port=$(docker inspect kafka1 | grep HostPort | sort | uniq | grep -o [0-9]*)
 
-docker exec -e HOST_IP=$1 -i -t kafka_kafka_2 /opt/kafka/bin/kafka-console-producer.sh --topic=$2 --bootstrap-server=$broker_ip:$port --producer.config /opt/kafka/config/producer_ssl.properties
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name producer -i -t acallejasz/kafka /opt/kafka/bin/kafka-console-producer.sh --topic=$2 --bootstrap-server=$broker_ip:$port --producer.config /opt/kafka/config/producer_ssl.properties
