@@ -32,7 +32,7 @@ do
 	# Eliminacion de topics desde Kafka instalado en local
 	#udo ./kafka-topics.sh --delete --zookeeper localhost:2181 --topic "$i"
 	# Eliminacion de topics desde Kafka instlado en docker (modificar el nombre del contenedor y la IP de zookeeper correspondiente)
-	sudo docker exec -itd $kafka_id kafka-topics.sh --delete --zookeeper $zookeeper_ip:2181 --topic "$i"
+	sudo docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --zookeeper $zookeeper_ip:2181 --topic "$i"
 
 done
 
