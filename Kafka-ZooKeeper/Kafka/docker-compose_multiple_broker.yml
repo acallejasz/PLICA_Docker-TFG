@@ -16,13 +16,13 @@ services:
     image: acallejasz/kafka
     container_name: kafka1
     ports:
-      - "9093"
+      - "9093:9093"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
     networks:
       PLICA:
-        #ipv4_address: 172.20.0.2
+        ipv4_address: 172.20.0.2
     depends_on: 
       - zookeeper
     volumes:

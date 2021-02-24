@@ -3,9 +3,11 @@
 set -eu
 
 KEYSTORE_FILENAME="kafka.server.keystore.jks"
+KEYSTORE_BROKER_FILENAME="kafka.broker.keystore.jks"
 KEYSTORE_CLIENT_FILENAME="kafka.client.keystore.jks"
 VALIDITY_IN_DAYS=3650
 DEFAULT_TRUSTSTORE_FILENAME="kafka.server.truststore.jks"
+DEFAULT_BROKER_TRUSTSTORE_FILENAME="kafka.broker.truststore.jks"
 DEFAULT_CLIENT_TRUSTSTORE_FILENAME="kafka.client.truststore.jks"
 TRUSTSTORE_WORKING_DIRECTORY="/var/ssl/private/kafka"
 KEYSTORE_WORKING_DIRECTORY="/var/ssl/private/kafka"
@@ -98,7 +100,11 @@ trust_store_private_key_file=""
     -alias CARoot -import -file $TRUSTSTORE_WORKING_DIRECTORY/ca-cert-kafka \
     -noprompt -dname "C=$COUNTRY, ST=$STATE, L=$LOCATION, O=$OU, CN=$CN" -keypass $PASS -storepass $PASS
 
+  # Kafka broker
 
+  keytool -keystore $TRUSTSTORE_WORKING_DIRECTORY/$DEFAULT_BROKER_TRUSTSTORE_FILENAME \
+    -alias CARoot -import -file $TRUSTSTORE_WORKING_DIRECTORY/ca-cert-kafka \
+    -noprompt -dname "C=$COUNTRY, ST=$STATE, L=$LOCATION, O=$OU, CN=$CN" -keypass $PASS -storepass $PASS
 
   trust_store_file="$TRUSTSTORE_WORKING_DIRECTORY/$DEFAULT_TRUSTSTORE_FILENAME"
 
@@ -191,13 +197,43 @@ echo "Now the CA will be imported into the client keystore."
 echo
 keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_CLIENT_FILENAME -alias CARoot \
   -import -file $CA_CERT_FILE -keypass $PASS -storepass $PASS -noprompt
-rm $CA_CERT_FILE # delete the trust store cert because it's stored in the trust store.
+#rm $CA_CERT_FILE # delete the trust store cert because it's stored in the trust store.
 
 echo
 echo "Now the keystore's signed certificate will be imported back into the client keystore."
 echo
 keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_CLIENT_FILENAME -alias $KAFKA_ADVERTISED_HOST_NAME -import \
   -file $KEYSTORE_SIGNED_CERT -keypass $PASS -storepass $PASS
+
+# Kafka broker
+
+
+keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_BROKER_FILENAME \
+  -alias $KAFKA_ADVERTISED_HOST_NAME -validity $VALIDITY_IN_DAYS -genkey -keyalg RSA \
+   -noprompt -dname "C=$COUNTRY, ST=$STATE, L=$LOCATION, O=$OU, CN=$CN" -keypass $PASS -storepass $PASS
+
+keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_BROKER_FILENAME -alias $KAFKA_ADVERTISED_HOST_NAME \
+  -certreq -file $KEYSTORE_SIGN_REQUEST -keypass $PASS -storepass $PASS
+
+openssl x509 -req -CA $CA_CERT_FILE -CAkey $trust_store_private_key_file \
+  -in $KEYSTORE_SIGN_REQUEST -out $KEYSTORE_SIGNED_CERT \
+  -days $VALIDITY_IN_DAYS -CAcreateserial
+# creates $KEYSTORE_SIGN_REQUEST_SRL which is never used or needed.
+
+echo
+echo "Now the CA will be imported into the broker keystore."
+echo
+keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_BROKER_FILENAME -alias CARoot \
+  -import -file $CA_CERT_FILE -keypass $PASS -storepass $PASS -noprompt
+rm $CA_CERT_FILE # delete the trust store cert because it's stored in the trust store.
+
+echo
+echo "Now the keystore's signed certificate will be imported back into the broker keystore."
+echo
+keytool -keystore $KEYSTORE_WORKING_DIRECTORY/$KEYSTORE_BROKER_FILENAME -alias $KAFKA_ADVERTISED_HOST_NAME -import \
+  -file $KEYSTORE_SIGNED_CERT -keypass $PASS -storepass $PASS
+
+
 
 echo
 echo "All done!"
