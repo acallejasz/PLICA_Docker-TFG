@@ -169,9 +169,9 @@ echo "" >> "$KAFKA_HOME/config/server.properties"
 
         # Broker security settings
 
-    updateConfig "ssl.truststore.location" "/var/ssl/private/kafka/kafka.broker.truststore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.truststore.location" "$TRUSTSTORE_WORKING_DIRECTORY" "$KAFKA_HOME/config/server.properties"
     updateConfig "ssl.truststore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
-    updateConfig "ssl.keystore.location" "/var/ssl/private/kafka/kafka.broker.keystore.jks" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.keystore.location" "$KEYSTORE_WORKING_DIRECTORY" "$KAFKA_HOME/config/server.properties"
     updateConfig "ssl.keystore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
     updateConfig "ssl.key.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
     updateConfig "sasl.enabled.mechanisms" "PLAIN" "$KAFKA_HOME/config/server.properties"
