@@ -21,10 +21,6 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
 
 ## Kafka + Zookeper
 
-<p style="text-align: justify;">
+Para este módulo hay que utilizar el docker-compose.yml para crear el contenedor de ZooKeeper, el primero de nuestros brokers, sobre el que se hará la conexión SSL de los clientes, los volumenes donde se encuentran los diversos certificados y ficheros de configuración y la network PLICA en la que la ip del gateway debe coincidir con el ADVERTISED_HOST_NAME. Tras esto pueden usar los scripts de la carpeta scripts_pruebas para crear topics, brokers, productores o consumidores. El de los brokers necesita de dos parámetros, donde el pirmero de ellos se corresponde con el puerto que utiizará ese broker y que debe ser distinto a los de cualquier otro y siempre +3 con respecto al último y el segundo parámetro que será el id del broker, y que no puede coincidir con el de ningún otro. Por su parte los dos últimos requieren de un parámetro, que se corresponde con el nombre del topic al que queremos conectarnos.
 
-Para este módulo hay que configurar el docker-compose_single_broker.yml para crear la network PLICA en la que la ip del gateway debe coincidir con el ADVERTISED_HOST_NAME de modo que se levantan estos dos contenedores y se pueden usar los scripts de la carpeta scripts_single_broker para crear topics, productores o consumidores. Estos dos últimos requieren de dos parámetros: El primero de ellos la ip del host, que es la del gateway de la network, y el segundo el nombre del topic al que queremos conectarnos.
-
-Si se quieren utilizar múltiples brokers se debe usar el docker-compose.yml  y desplegar el contenedor como docker--compose up --scale kafka=numero_brokers -d, y usar los scripts de la carpeta scripts_multiple_broker si se desea usar dos de los brokers, uno como consumidor y otro como productor. Si se quieren usar como brokers y levantar los otros dos contenedores como consumidor y productor para poder hacer replicación en los topics usar los scripts de la carpeta scripts_single_broker y sustituir como bootstrap-server=`broker-list.sh`
-
-</p> 
+ 
