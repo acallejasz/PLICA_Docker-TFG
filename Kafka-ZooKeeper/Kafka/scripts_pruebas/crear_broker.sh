@@ -10,6 +10,7 @@
 # Por teclado se introduce: 
 #	- Primero el numero de puerto, que debe ser ser +3 el del último broker utilizado 
 #	- El segundo parámetro a introducir deber ser el id del broker, que no debe coincidir con ningún otro
+#   - El tercero, para añadir algun flag extra al comando run, como por ejmplo para ejecutarlo en backgroud añadir -d
 
 broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafka_PLICA)
 port1=$(($1-1))
@@ -19,4 +20,4 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v kafka_certs-zook
 -v kafka_broker_config:/opt/kafka/config -e  KAFKA_ADVERTISED_HOST_NAME=$broker_ip -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2281 -e KAFKA_PORT=$1 -e KAFKA_ADVERTISED_PORT=$1 \
 -e KAFKA_LISTENERS=PLAINTEXT://:$port1,SSL://:$1,SASL_SSL://:$port2 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$broker_ip:$port1,SSL://$broker_ip:$1,SASL_SSL://$broker_ip:$port2 \
 -e  KAFKA_BROKER_ID=$2 -e TRUSTSTORE_WORKING_DIRECTORY=/var/ssl/private/kafka/kafka.broker$2.truststore.jks -e KEYSTORE_WORKING_DIRECTORY=/var/ssl/private/kafka/kafka.broker$2.keystore.jks \
---name broker$2 --network kafka_PLICA -p $1:$1 -i -t acallejasz/kafka /usr/bin/start-broker.sh
+--name broker$2 --network kafka_PLICA -p $1:$1 -i -t  $3 acallejasz/kafka /usr/bin/start-broker.sh
