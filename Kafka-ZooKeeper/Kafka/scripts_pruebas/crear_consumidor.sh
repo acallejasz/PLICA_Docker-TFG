@@ -12,4 +12,4 @@
 broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafka_PLICA)
 port=$(docker inspect kafka | grep HostPort | sort | uniq | grep -o [0-9]*)
 
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$1 --name consumer -i -t acallejasz/kafka /opt/kafka/bin/kafka-console-consumer.sh --topic=$2 --from-beginning --bootstrap-server=$broker_ip:$port --consumer.config /opt/kafka/config/consumer_ssl.properties
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -e HOST_IP=$broker_ip --name consumer -i -t acallejasz/kafka /opt/kafka/bin/kafka-console-consumer.sh --topic=$2 --from-beginning --bootstrap-server=$broker_ip:$port --consumer.config /opt/kafka/config/consumer_ssl.properties
