@@ -1,6 +1,6 @@
 #Dockerfile for Zookeeper
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:8u212-jre-alpine
 
 ARG zookeeper_version=3.5.9
 
