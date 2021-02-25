@@ -1,23 +1,15 @@
 # Gestor de Flujos v.0 PLICA
 # Maintainer: Universidad Politecnica de Madrid
-# Contact: mario.sanz@upm.es
+# Contact: a.callejasz@upm.es
 
 
 #!/bin/bash
 
-
 # NOTA: En docker (contenedor kafka) es necesario habilitar "delete.topics.enable=true" en el fichero
 # "server.properties" en el path del contenedor "/opt/kafka_2.12-0.11.0.1/config".
 
-# Para acceder al contenedor "docker exec -it nombre_del_container /bin/bash", nano no esta instalado
-# se puede instalar con "apk add nano".
-
-# Solo es necesario si se ejecuta kafka en local no en docker
-#BIN_PATH="/home/kafka/kafka/bin"
-#cd $BIN_PATH
-
 # Filtrado por puertos expuestos, kafka comparte puerto con el conector de elastic
-# Se opta por el filtrado referenciado a su imagen base
+# Se opta por el filtrado referenciado al nombre del contenedor levantado
 
 #kafka_id=$(docker ps -q --filter "expose=9092")
 kafka_id=$(docker ps -q --filter "name=kafka")

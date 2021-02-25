@@ -1,17 +1,13 @@
 # Gestor de Flujos v.0 PLICA
 # Maintainer: Universidad Politecnica de Madrid
-# Contact: mario.sanz@upm.es
+# Contact: a.callejasz@upm.es
 
 
 #!/bin/bash
 
-
-# Solo es necesario si se ejecuta kafka en local no en docker
-#BIN_PATH="/home/kafka/kafka/bin"
-#cd $BIN_PATH
-
 # Filtrado por puertos expuestos, kafka comparte puerto con el conector de elastic
-# Se opta por el filtrado referenciado a su imagen base
+# Se opta por el filtrado referenciado al contenedor que se levanta
+# Se debe introducir como primer parámetro el número de réplicas y como segundo el número de particiones
 
 kafka_id=$(docker ps -q --filter "name=kafka")
 zookeeper_id=$(docker ps -q --filter "expose=2181")
