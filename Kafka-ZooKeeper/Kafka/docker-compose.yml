@@ -11,7 +11,8 @@ services:
     ports:
       - "2281:2281"
     volumes:
-      - certs-zookeeper:/var/ssl/private  
+      - certs_zookeeper:/var/ssl/private
+      - certs_kafka:/var/ssl/private/client 
 
   kafka:
     build: .
@@ -28,8 +29,8 @@ services:
     depends_on: 
       - zookeeper
     volumes:
-      - certs-zookeeper:/var/ssl/private/zookeeper
-      - certs-kafka:/var/ssl/private/kafka
+      - certs_zookeeper:/var/ssl/private/zookeeper
+      - certs_kafka:/var/ssl/private/kafka
       - kafka_config:/opt/kafka/config
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -43,6 +44,6 @@ networks:
           gateway: 172.20.0.1
 
 volumes:
-  certs-zookeeper: 
-  certs-kafka:
-  kafka_config:        
+  certs_zookeeper: 
+  certs_kafka:
+  kafka_config:

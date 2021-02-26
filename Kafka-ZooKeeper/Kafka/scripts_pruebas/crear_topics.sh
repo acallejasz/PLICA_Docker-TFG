@@ -24,8 +24,7 @@ do
 	# Creacion de topics desde Kafka instalado en local
 	#sudo ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic "$i"
 	# Creacion de topics desde Kafka instlado en docker (modificar el nombre del contenedor y la IP de zookeeper correspondiente)
-	sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --create --bootstrap-server=$broker_ip:$port \
-	--command-config=/opt/kafka/config/producer_ssl.properties --replication-factor $1 --partitions $2 --topic "$i"  --config retention.ms=5000
+	sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --create --zookeeper $zookeeper_ip:2281 --replication-factor $1 --partitions $2 --topic "$i"  --config retention.ms=5000
 
 done
 
