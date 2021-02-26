@@ -13,14 +13,14 @@ LABEL org.label-schema.name="zookeeper" \
 ENV ZOOKEEPER_VERSION=$zookeeper_version \
 	ZK_HOME=/opt/zookeeper 
 
-COPY zookeeper_jaas.conf zookeeper-ssl.sh zkEnv.sh zoo.cfg /tmp/
+COPY zookeeper_jaas.conf zookeeper_certs.sh zkEnv.sh zoo.cfg /tmp/
 
 #Install and config 
 
 RUN apk add --no-cache wget openssl bash \
  && mkdir -p ${ZK_HOME} \
  && chmod a+x /tmp/*.sh \
- && mv /tmp/zookeeper-ssl.sh /tmp/zookeeper_jaas.conf /tmp/zkEnv.sh /tmp/zoo.cfg ${ZK_HOME} \
+ && mv /tmp/zookeeper_certs.sh /tmp/zookeeper_jaas.conf /tmp/zkEnv.sh /tmp/zoo.cfg ${ZK_HOME} \
  && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz \
     | tar -xzC ${ZK_HOME} --strip-components=1 \
  && mv ${ZK_HOME}/zoo.cfg ${ZK_HOME}/conf/zoo.cfg \
@@ -29,7 +29,7 @@ RUN apk add --no-cache wget openssl bash \
  && mkdir -p /tmp/zookeeper \
  &&	mkdir ${ZK_HOME}/data \
  && mkdir -p /var/ssl \
- && ${ZK_HOME}/zookeeper-ssl.sh
+ && ${ZK_HOME}/zookeeper_certs.sh
 
 EXPOSE 2181 2281 2888 3888
 
