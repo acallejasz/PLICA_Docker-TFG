@@ -10,9 +10,7 @@ services:
     ports:
       - "2281:2281"
     volumes:
-      - certs_zookeeper:/var/ssl/private  
-      - certs_zookeeper:/var/ssl/private
-      - certs_kafka:/var/ssl/private/client 
+      - certs_zookeeper:/var/ssl/private 
 
   kafka:
     build: .
@@ -46,8 +44,4 @@ networks:
 volumes:
   certs_zookeeper: 
   certs_kafka:
-<<<<<<< HEAD
   kafka_config:        
-=======
-  kafka_config:
->>>>>>> 218bfdad87f716affcf04d0ef2183eeef0494d63

@@ -17,12 +17,9 @@ zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddres
 
 declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "PF-DATA" "UBA-DATA")
 
-## now loop through the above array
 for i in "${topics[@]}"
 do
-	# Eliminacion de topics desde Kafka instalado en local
-	#udo ./kafka-topics.sh --delete --zookeeper localhost:2181 --topic "$i"
-	# Eliminacion de topics desde Kafka instlado en docker (modificar el nombre del contenedor y la IP de zookeeper correspondiente)
+	# Eliminacion de topics desde Kafka instalado en docker
 	sudo docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --bootstrap-server=$broker_ip:$port \
 	--command-config=/opt/kafka/config/producer_ssl.properties --topic "$i"
 
