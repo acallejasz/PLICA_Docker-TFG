@@ -12,8 +12,8 @@
 # Se opta por el filtrado referenciado al nombre del contenedor levantado
 
 kafka_id=$(docker ps -q --filter "name=kafka")
-zookeeper_id=$(docker ps -q --filter "expose=2181")
-zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $zookeeper_id)
+broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafka_PLICA)
+port=$(docker inspect kafka | grep HostPort | sort | uniq | grep -o [0-9]*)
 
 declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "PF-DATA" "UBA-DATA")
 
