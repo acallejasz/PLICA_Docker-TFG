@@ -2,7 +2,6 @@ version: '3.9'
 services:
 
   zookeeper:
-    build: ../ZooKeeper/.
     image: acallejasz/zookeeper
     container_name: zookeeper
     networks:
@@ -11,6 +10,7 @@ services:
     ports:
       - "2281:2281"
     volumes:
+      - certs_zookeeper:/var/ssl/private  
       - certs_zookeeper:/var/ssl/private
       - certs_kafka:/var/ssl/private/client 
 
@@ -46,4 +46,8 @@ networks:
 volumes:
   certs_zookeeper: 
   certs_kafka:
+<<<<<<< HEAD
+  kafka_config:        
+=======
   kafka_config:
+>>>>>>> 218bfdad87f716affcf04d0ef2183eeef0494d63

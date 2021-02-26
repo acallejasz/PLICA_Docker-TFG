@@ -16,7 +16,7 @@ broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}
 port1=$(($1-1))
 port2=$(($1+1))
 
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v kafka_certs-zookeeper:/var/ssl/private/zookeeper -v kafka_certs-kafka:/var/ssl/private/kafka \
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v kafka_certs_zookeeper:/var/ssl/private/zookeeper -v kafka_certs_kafka:/var/ssl/private/kafka \
 -v kafka_broker_config:/opt/kafka/config -e  KAFKA_ADVERTISED_HOST_NAME=$broker_ip -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2281 -e KAFKA_PORT=$1 -e KAFKA_ADVERTISED_PORT=$1 \
 -e KAFKA_LISTENERS=PLAINTEXT://:$port1,SSL://:$1,SASL_SSL://:$port2 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$broker_ip:$port1,SSL://$broker_ip:$1,SASL_SSL://$broker_ip:$port2 \
 -e  KAFKA_BROKER_ID=$2 -e TRUSTSTORE_WORKING_DIRECTORY=/var/ssl/private/kafka/kafka.broker$2.truststore.jks -e KEYSTORE_WORKING_DIRECTORY=/var/ssl/private/kafka/kafka.broker$2.keystore.jks \

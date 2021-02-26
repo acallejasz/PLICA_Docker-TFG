@@ -42,5 +42,4 @@ RUN apk add --no-cache bash openssl docker \
 
 COPY overrides /opt/overrides
 
-# Use "exec" form so that it runs as PID 1 (useful for graceful shutdown)
 CMD ["start-kafka.sh"]
