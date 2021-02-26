@@ -16,7 +16,6 @@ port=$(docker inspect kafka | grep HostPort | sort | uniq | grep -o [0-9]*)
 
 declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "PF-DATA" "UBA-DATA")
 
-## now loop through the above array
 for i in "${topics[@]}"
 do
 	# Creacion de topics desde Kafka instalado en docker
