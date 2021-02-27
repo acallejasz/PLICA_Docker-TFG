@@ -1,11 +1,11 @@
-version: '3.2'
+version: '3.9'
 
 services:
   elasticsearch:
     build:
       context: elasticsearch/
       args:
-        EK_VERSION: $EK_VERSION
+        EK_VERSION: 7.9.2
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -16,7 +16,6 @@ services:
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
-      - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: acallejasz
@@ -29,7 +28,7 @@ services:
     build:
       context: kibana/
       args:
-        EK_VERSION: $EK_VERSION
+        EK_VERSION: 7.9.2
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
