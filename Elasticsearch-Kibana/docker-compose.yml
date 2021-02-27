@@ -1,0 +1,56 @@
+version: '3.2'
+
+services:
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        EK_VERSION: $EK_VERSION
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: acallejasz
+      discovery.type: single-node
+    networks:
+      PLICA:
+        ipv4_address: 172.21.0.2
+
+  kibana:
+    build:
+      context: kibana/
+      args:
+        EK_VERSION: $EK_VERSION
+    volumes:
+      - type: bind
+        source: ./kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    networks:
+      PLICA:
+        ipv4_address: 172.21.0.3
+    depends_on:
+      - elasticsearch
+
+networks:
+  PLICA:
+    driver: bridge
+    ipam:
+      driver: default 
+      config:
+        - subnet: 172.21.0.0/24
+          gateway: 172.21.0.1
+
+volumes:
+  elasticsearch:
