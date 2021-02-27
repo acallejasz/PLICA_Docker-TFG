@@ -6,7 +6,8 @@ services:
       context: elasticsearch/
       args:
         EK_VERSION: 7.9.2
-    image: elasticsearch    
+    image: elasticsearch
+    container_name: elasticsearch    
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -19,7 +20,7 @@ services:
       - "9200:9200"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: acallejasz
+      ELASTIC_PASSWORD: xxxx
       discovery.type: single-node
     networks:
       PLICA:
@@ -30,7 +31,8 @@ services:
       context: kibana/
       args:
         EK_VERSION: 7.9.2
-    image: kibana     
+    image: kibana
+    container_name: kibana     
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
