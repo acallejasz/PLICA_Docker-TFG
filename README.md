@@ -2,7 +2,7 @@
 
 <br/><br/><br/>
 
-# Repositorio para los archivos y pruebas Docker de mi TFG
+# Repositorio para los archivos de mi TFG
 
 Versión: 16 de Febrero de 2021
 
