@@ -16,8 +16,9 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
 
 ## Partes del proyecto
 
-  - Directorio Kafka-ZooKeeper, que contiene el dockerfile y dockercompose para levantar apache Kafka y Zookeper con SSL y bastionado
-  - Directorio Spark-Hadoop, que contiene el dockerfile y dockercompose para levantar apache Spark y Hadoop con bastionado
+  - Directorio Kafka-ZooKeeper, que contiene el dockerfile y dockercompose para levantar Apache Kafka y Zookeper con SSL y bastionado
+  - Directorio Spark-Hadoop, que contiene el dockerfile y dockercompose para levantar Apache Spark y Hadoop con bastionado
+  - Directorio Elasticsearch-Kibana, que contiene el dockercompose para levantar Elasticsearch y la interfaz visual de Kibana
 
 ## Kafka + Zookeper
 
@@ -26,3 +27,6 @@ Para este módulo hay que utilizar el docker-compose.yml para crear el contenedo
 Tras esto pueden usar los scripts de la carpeta scripts_pruebas para crear topics, brokers, productores o consumidores. El de los brokers necesita de dos parámetros, donde el pirmero de ellos se corresponde con el puerto que utiizará ese broker y que debe ser distinto a los de cualquier otro y siempre +3 con respecto al último y el segundo parámetro que será el id del broker, y que no puede coincidir con el de ningún otro. Por su parte los dos últimos requieren de un parámetro, que se corresponde con el nombre del topic al que queremos conectarnos.
 
  
+## Elasticsearch + Kibana
+
+Para este módulo simplemente se utilizan las imagenes oficiales proporcionadas por la compañía que se encuentran disponibles en DockerHub. Cuentan con una mínima configuración, permitiendo ver la interfaz visual de Kibana en localhost:5601, con usuario acallejasz y contraseña xxxx. Utiliza la versión básica (No de pago ni el free trial).
