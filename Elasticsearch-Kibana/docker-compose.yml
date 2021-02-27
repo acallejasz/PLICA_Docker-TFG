@@ -6,6 +6,7 @@ services:
       context: elasticsearch/
       args:
         EK_VERSION: 7.9.2
+    image: elasticsearch    
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -29,6 +30,7 @@ services:
       context: kibana/
       args:
         EK_VERSION: 7.9.2
+    image: kibana     
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
