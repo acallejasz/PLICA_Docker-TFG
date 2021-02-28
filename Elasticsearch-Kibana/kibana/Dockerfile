@@ -1,4 +1,4 @@
-ARG EK_VERSION=7.9.2
-FROM kibana:${EK_VERSION}
+ARG EK_VERSION
+FROM docker.elastic.co/kibana/kibana:${EK_VERSION}
 
 

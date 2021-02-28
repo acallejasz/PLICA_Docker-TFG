@@ -1,4 +1,3 @@
-ARG EK_VERSION=7.9.2
-FROM elasticsearch:${EK_VERSION}
-
+ARG EK_VERSION
+FROM docker.elastic.co/elasticsearch/elasticsearch:${EK_VERSION}
 

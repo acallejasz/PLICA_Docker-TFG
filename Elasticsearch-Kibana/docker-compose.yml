@@ -5,46 +5,51 @@ services:
     build:
       context: elasticsearch/
       args:
-        EK_VERSION: 7.9.2
-    image: elasticsearch
+        EK_VERSION: ${EK_VERSION}
+    image: elasticsearch:${EK_VERSION}
     container_name: elasticsearch    
+    environment:
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ELASTIC_CLUSTER_NAME: ${ELASTIC_CLUSTER_NAME}
+      ES_JAVA_OPTS: -Xmx${ELASTICSEARCH_HEAP} -Xms${ELASTICSEARCH_HEAP}
+      discovery.type: single-node
     volumes:
-      - type: bind
-        source: ./elasticsearch/config/elasticsearch.yml
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-        read_only: true
-      - type: volume
-        source: elasticsearch
-        target: /usr/share/elasticsearch/data
+      - elasticsearch:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - "9200:9200"
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: xxxx
-      discovery.type: single-node
     networks:
       PLICA:
-        ipv4_address: 172.21.0.2
+        ipv4_address: 172.21.0.2  
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 200000
+        hard: 200000
 
   kibana:
     build:
       context: kibana/
       args:
-        EK_VERSION: 7.9.2
-    image: kibana
-    container_name: kibana     
+        EK_VERSION: ${EK_VERSION}
+    image: kibana:${EK_VERSION}    
+    container_name: kibana        
     volumes:
-      - type: bind
-        source: ./kibana/config/kibana.yml
-        target: /usr/share/kibana/config/kibana.yml
-        read_only: true
-    ports:
-      - "5601:5601"
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    environment:
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ELASTIC_HOST_PORT: ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+    depends_on:
+      - elasticsearch  
     networks:
       PLICA:
         ipv4_address: 172.21.0.3
-    depends_on:
-      - elasticsearch
+    ports:
+      - "5601:5601"
 
 networks:
   PLICA:

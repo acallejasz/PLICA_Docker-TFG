@@ -1,9 +1,12 @@
----
 ## Default Elasticsearch configuration from Elasticsearch base image.
-cluster.name: "elastic-cluster"
+cluster.name: ${ELASTIC_CLUSTER_NAME}
 network.host: 0.0.0.0
 
-## X-Pack settings
+## License
 xpack.license.self_generated.type: basic
+
+## Security
 xpack.security.enabled: true
+
+## Monitoring
 xpack.monitoring.collection.enabled: true
