@@ -1,3 +1,3 @@
 ARG EK_VERSION
-FROM docker.elastic.co/elasticsearch/elasticsearch:${EK_VERSION}
+FROM elasticsearch:${EK_VERSION}
 
