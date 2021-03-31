@@ -6,7 +6,7 @@ services:
       args:  
         SPARK_VERSION: ${SPARK_VERSION}
         HADOOP_VERSION: ${HADOOP_VERSION}
-    image: acallejasz/spark_base
+    image: spark_base
     container_name: (Use --scale spark-base=0)
     environment:
       ENABLE_INIT_DAEMON: ${ENABLE_INIT_DAEMON}
@@ -48,6 +48,8 @@ services:
       SPARK_MASTER: ${SPARK_MASTER}
       SPARK_WORKER_WEBUI_PORT: ${SPARK_WORKER_WEBUI_PORT} 
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
+      SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
+      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
     ports:
       - "8081:8081"
     networks:

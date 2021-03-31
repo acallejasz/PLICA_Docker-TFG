@@ -1,4 +1,4 @@
-FROM acallejasz/spark_base
+FROM spark_base
 
 ARG spark_version=2.4.4
 ARG hadoop_version=2.7

@@ -1,4 +1,4 @@
-FROM acallejasz/spark_base
+FROM spark_base
 
 ARG SPARK_VERSION
 ARG HADOOP_VERSION
