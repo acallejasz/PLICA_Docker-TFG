@@ -30,3 +30,7 @@ Tras esto pueden usar los scripts de la carpeta scripts_pruebas para crear topic
 ## Elasticsearch + Kibana
 
 Para este módulo simplemente se utilizan las imagenes oficiales proporcionadas por la compañía que se encuentran disponibles en DockerHub. Cuentan con una mínima configuración, permitiendo ver la interfaz visual de Kibana en localhost:5601, con usuario elastic y contraseña xxxx. Utiliza la versión básica (No de pago ni el free trial).
+
+## Spark-Hadoop
+
+User el docker-compose.yml con --scale spark-base=0 (Se necesita contruir la imagen pero no hay que levantarla)
