@@ -1,6 +1,13 @@
-FROM bde2020/spark-submit:3.1.1-hadoop3.2
+FROM acallejasz/spark
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
+ARG spark_version=2.4.4
+ARG hadoop_version=2.7
+
+LABEL org.label-schema.name="spark_python" \
+      org.label-schema.description="Apache spark" \
+      org.label-schema.version="${spark_version}_${hadoop_version}" \
+      org.label-schema.schema-version="1.0" \
+      maintainer="acallejasz"
 
 COPY template.sh /
 

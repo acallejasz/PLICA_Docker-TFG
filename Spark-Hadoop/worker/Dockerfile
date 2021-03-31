@@ -1,12 +1,15 @@
-FROM bde2020/spark-base:3.1.1-hadoop3.2
+FROM acallejasz/spark
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
+ARG spark_version=2.4.4
+ARG hadoop_version=2.7
+
+LABEL org.label-schema.name="spark_worker" \
+      org.label-schema.description="Apache spark" \
+      org.label-schema.version="${spark_version}_${hadoop_version}" \
+      org.label-schema.schema-version="1.0" \
+      maintainer="acallejasz"
 
 COPY worker.sh /
-
-ENV SPARK_WORKER_WEBUI_PORT 8081
-ENV SPARK_WORKER_LOG /spark/logs
-ENV SPARK_MASTER "spark://spark-master:7077"
 
 EXPOSE 8081
 
