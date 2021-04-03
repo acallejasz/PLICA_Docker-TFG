@@ -1,0 +1,4 @@
+numpy
+findspark
+pyspark
+pyelasticsearch

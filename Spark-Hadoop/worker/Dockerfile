@@ -1,7 +1,7 @@
 FROM spark_base
 
-ARG spark_version=2.4.4
-ARG hadoop_version=2.7
+ARG SPARK_VERSION
+ARG HADOOP_VERSION
 
 LABEL org.label-schema.name="spark_worker" \
       org.label-schema.description="Apache spark" \
