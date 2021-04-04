@@ -2,7 +2,7 @@
 
 FROM openjdk:8u212-jre-alpine
 
-ARG zookeeper_version=3.5.9
+ARG zookeeper_version=3.6.2
 
 LABEL org.label-schema.name="zookeeper" \
       org.label-schema.description="Apache ZooKeeper" \
@@ -17,7 +17,7 @@ COPY zookeeper_jaas.conf zookeeper_certs.sh zkEnv.sh zoo.cfg /tmp/
 
 #Install and config 
 
-RUN apk add --no-cache wget openssl bash \
+RUN apk add --no-cache wget openssl bash\
  && mkdir -p ${ZK_HOME} \
  && chmod a+x /tmp/*.sh \
  && mv /tmp/zookeeper_certs.sh /tmp/zookeeper_jaas.conf /tmp/zkEnv.sh /tmp/zoo.cfg ${ZK_HOME} \
