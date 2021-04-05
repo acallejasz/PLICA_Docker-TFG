@@ -9,7 +9,8 @@ LABEL org.label-schema.name="spark_master" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
 
-COPY master.sh /
+COPY master.sh template.sh /
+COPY log4j.properties /spark/conf/
 
 EXPOSE 8080 7077 6066
 

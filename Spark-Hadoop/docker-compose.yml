@@ -28,12 +28,19 @@ services:
       SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
       SPARK_MASTER_WEBUI_PORT: ${SPARK_MASTER_WEBUI_PORT}
       SPARK_MASTER_LOG: ${SPARK_MASTER_LOG}
+      SPARK_MASTER_NAME: ${SPARK_MASTER_NAME}
+      SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
+      SPARK_SUBMIT_ARGS: ${SPARK_SUBMIT_ARGS}
+      SPARK_APPLICATION_PYTHON_LOCATION: ${SPARK_APPLICATION_PYTHON_LOCATION_WF}
+      SPARK_APPLICATION_ARGS: ${SPARK_APPLICATION_ARGS}
     ports:
       - "8080:8080"
       - "7077:7077"
     networks:
       PLICA:
-        ipv4_address: 172.22.0.2 
+        ipv4_address: 172.22.0.2
+    volumes:
+      - logs:/logs  
   spark-worker-1:
     build:
       context: worker/
@@ -55,28 +62,6 @@ services:
     networks:
       PLICA:
         ipv4_address: 172.22.0.3
-  spark-python-wf:
-    build:
-      context: template/
-      args:  
-        SPARK_VERSION: ${SPARK_VERSION}
-        HADOOP_VERSION: ${HADOOP_VERSION}
-    image: spark-python-wf:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
-    container_name: spark-python-wf
-    depends_on:
-      - spark-master
-    environment:
-      ENABLE_INIT_DAEMON: ${ENABLE_INIT_DAEMON}
-      SPARK_MASTER_NAME: ${SPARK_MASTER_NAME}
-      SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
-      SPARK_SUBMIT_ARGS: ${SPARK_SUBMIT_ARGS}
-      SPARK_APPLICATION_PYTHON_LOCATION: ${SPARK_APPLICATION_PYTHON_LOCATION_WF}
-      SPARK_APPLICATION_ARGS: ${SPARK_APPLICATION_ARGS}
-    links:
-      - spark-master:spark-master
-    networks:
-      PLICA:
-        ipv4_address: 172.22.0.4
 networks:
   PLICA:
     driver: bridge
@@ -85,3 +70,5 @@ networks:
       config:
         - subnet: 172.22.0.0/24
           gateway: 172.22.0.1
+volumes:
+  logs: 

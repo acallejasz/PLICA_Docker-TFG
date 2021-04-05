@@ -2,7 +2,7 @@
 
 export SPARK_HOME=/spark
 
-export SPARK_MASTER_HOST=`hostname`
+export SPARK_MASTER_HOST=spark-master
 
 . "/spark/sbin/spark-config.sh"
 
