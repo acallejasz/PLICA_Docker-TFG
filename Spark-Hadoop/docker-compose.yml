@@ -31,6 +31,14 @@ services:
       SPARK_MASTER_NAME: ${SPARK_MASTER_NAME}
       SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
       SPARK_SUBMIT_ARGS: ${SPARK_SUBMIT_ARGS}
+      #Kafka
+      KAFKA_BROKER: ${KAFKA_BROKER}
+      WF_TOPIC: ${WF_TOPIC}
+      BT_TOPIC: ${BT_TOPIC}
+      FW_TOPIC: ${FW_TOPIC}
+      RF_TOPIC: ${RF_TOPIC}
+      RM_TOPIC: ${RM_TOPIC}
+      SM_TOPIC: ${SM_TOPIC}
       #Files
       SPARK_APPLICATION_PYTHON_LOCATION_WF: ${SPARK_APPLICATION_PYTHON_LOCATION_WF}
       SPARK_APPLICATION_PYTHON_LOCATION_BT: ${SPARK_APPLICATION_PYTHON_LOCATION_BT}
@@ -53,14 +61,13 @@ services:
         ipv4_address: 172.22.0.2
     volumes:
       - logs:/logs  
-  spark-worker-1:
+  worker:
     build:
       context: worker/
       args:  
         SPARK_VERSION: ${SPARK_VERSION}
         HADOOP_VERSION: ${HADOOP_VERSION}
     image: spark-worker:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
-    container_name: spark-worker-1
     depends_on:
       - spark-master
     environment:
@@ -69,11 +76,8 @@ services:
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
       SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
-    ports:
-      - "8081:8081"
     networks:
       PLICA:
-        ipv4_address: 172.22.0.3
 networks:
   PLICA:
     driver: bridge
