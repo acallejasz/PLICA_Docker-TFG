@@ -15,7 +15,7 @@ spark_master=$(docker ps -q --filter "name=spark-master")
 
 if [ -z "${kafka_id}" ]; then
 	echo
-    echo "Tienes que levantar primero el  contenedor de Kafka"
+    echo "Error: Tienes que levantar primero el contenedor de Kafka"
     echo
     exit 0
 fi
