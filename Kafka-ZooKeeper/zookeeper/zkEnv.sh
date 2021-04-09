@@ -142,28 +142,9 @@ fi
 # default heap for zookeeper server
 ZK_SERVER_HEAP="${ZK_SERVER_HEAP:-1000}"
 
-export SERVER_JVMFLAGS="
--Djava.security.auth.login.config=${ZK_HOME}/zookeeper_jaas.conf
--Dzookeeper.serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
--Dzookeeper.authProvider.sasl=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
--Dzookeeper.ssl.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.keyStore.password=xxxxxxxx
--Dzookeeper.ssl.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks
--Dzookeeper.ssl.trustStore.password=xxxxxxxx
--Dzookeeper.ssl.quorum.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.quorum.keyStore.password=xxxxxxxx
--Dzookeeper.ssl.quorum.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks
--Dzookeeper.ssl.quorum.trustStore.password=xxxxxxxx
--Dzookeeper.ssl.quorum.hostnameVerification=false
-"
+export SERVER_JVMFLAGS=""
 
 # default heap for zookeeper client
 ZK_CLIENT_HEAP="${ZK_CLIENT_HEAP:-256}"
-export CLIENT_JVMFLAGS="
--Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty 
--Dzookeeper.client.secure=true 
--Dzookeeper.ssl.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.keyStore.password=xxxxxxxx 
--Dzookeeper.ssl.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks 
--Dzookeeper.ssl.trustStore.password=xxxxxxxx"
+export CLIENT_JVMFLAGS=""
 

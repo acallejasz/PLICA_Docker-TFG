@@ -17,7 +17,7 @@ COPY zookeeper_jaas.conf zookeeper_certs.sh zkEnv.sh zoo.cfg /tmp/
 
 #Install and config 
 
-RUN apk add --no-cache wget openssl bash\
+RUN apk add --no-cache wget openssl bash \
  && mkdir -p ${ZK_HOME} \
  && chmod a+x /tmp/*.sh \
  && mv /tmp/zookeeper_certs.sh /tmp/zookeeper_jaas.conf /tmp/zkEnv.sh /tmp/zoo.cfg ${ZK_HOME} \

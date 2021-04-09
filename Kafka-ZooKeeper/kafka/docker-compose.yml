@@ -2,14 +2,14 @@ version: '3.9'
 services:
 
   zookeeper:
-    build: ../zooKeeper/.
+    build: ../zookeeper/.
     image: acallejasz/zookeeper
     container_name: zookeeper
     networks:
       PLICA:
         ipv4_address: 172.20.0.11
     ports:
-      - "2281:2281"
+      - "2181:2181"
     volumes:
       - certs_zookeeper:/var/ssl/private 
 
@@ -18,10 +18,10 @@ services:
     image: acallejasz/kafka
     container_name: kafka
     ports:
-      - "9093:9093"
+      - "9092:9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 172.20.0.1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2281
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     networks:
       PLICA:
         ipv4_address: 172.20.0.2
