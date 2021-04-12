@@ -1,4 +1,3 @@
 numpy
 findspark
 pyspark
-pyelasticsearch

@@ -11,6 +11,7 @@
 # Comprobacion de que Kafka esta levantado
 
 kafka_id=$(docker ps -q --filter "name=kafka")
+elastic_id=$(docker ps -q --filter "name=elasticsearch")
 spark_master=$(docker ps -q --filter "name=spark-master")
 
 if [ -z "${kafka_id}" ]; then
@@ -19,6 +20,16 @@ if [ -z "${kafka_id}" ]; then
     echo
     exit 0
 fi
+
+# Comprobacion de que Elastic esta levantado
+
+if [ -z "${elastic_id}" ]; then
+	echo
+    echo "Error: Tienes que levantar primero el contenedor de Kafka"
+    echo
+    exit 0
+fi
+
 
 if [ "$1" == "wifi" ] || [ "$1" == "bluetooth" ] || [ "$1" == "fw" ] || [ "$1" == "rf" ] || [ "$1" == "rm" ] || [ "$1" == "siem" ]; then
 	docker exec -itd ${spark_master} /bin/sh /template.sh $1

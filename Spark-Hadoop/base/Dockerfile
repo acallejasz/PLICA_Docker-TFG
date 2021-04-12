@@ -9,20 +9,16 @@ LABEL org.label-schema.name="spark" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
 
-COPY wait-for-step.sh execute-step.sh finish-step.sh /
 COPY requirements.txt /app/
 
 RUN apk update \
   && apk add --no-cache curl bash openjdk8-jre python3 py-pip nss libc6-compat make gcc g++ python3-dev\
   && ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 \
-  && chmod +x *.sh \
   && wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
   && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
   && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
   && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
   && /usr/bin/python3.7 -m pip install --upgrade pip \
-  && pip3 install -r /app/requirements.txt \
-  && cd / \
-  && chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
+  && pip3 install -r /app/requirements.txt 
 
-COPY PLICA_V4.2 /app
+COPY PLICA_V6 /app
