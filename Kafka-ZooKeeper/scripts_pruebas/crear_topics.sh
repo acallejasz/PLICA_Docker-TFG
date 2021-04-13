@@ -21,7 +21,7 @@ declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "
 for i in "${topics[@]}"
 do
 	# Creacion de topics desde Kafka instalado en docker
-	sudo docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --create --zookeeper $zookeeper_ip:2181 --replication-factor $1 --partitions $2 --topic "$i"  --config retention.ms=5000
+	docker exec -it $kafka_id /opt/kafka/bin/kafka-topics.sh --create --zookeeper $zookeeper_ip:2181 --replication-factor $1 --partitions $2 --topic "$i"  --config retention.ms=5000
 
 done
 

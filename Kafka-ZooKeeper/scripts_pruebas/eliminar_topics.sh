@@ -20,7 +20,7 @@ declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "
 for i in "${topics[@]}"
 do
 	# Eliminacion de topics desde Kafka instalado en docker
-	sudo docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --zookeeper zookeeper:2181 --topic "$i"
+	docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --zookeeper zookeeper:2181 --topic "$i"
 
 done
 
