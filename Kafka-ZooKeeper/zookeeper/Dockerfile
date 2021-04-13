@@ -2,7 +2,7 @@
 
 FROM openjdk:8u212-jre-alpine
 
-ARG zookeeper_version=3.6.2
+ARG zookeeper_version=3.5.9
 
 LABEL org.label-schema.name="zookeeper" \
       org.label-schema.description="Apache ZooKeeper" \
