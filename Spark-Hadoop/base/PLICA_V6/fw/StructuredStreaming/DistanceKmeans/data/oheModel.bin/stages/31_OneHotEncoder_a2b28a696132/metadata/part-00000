@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808833614,"sparkVersion":"2.4.4","uid":"OneHotEncoder_a2b28a696132","paramMap":{"inputCol":"ICMP Type_index","outputCol":"ICMP Type_ohe"},"defaultParamMap":{"dropLast":true,"outputCol":"OneHotEncoder_a2b28a696132__output"}}

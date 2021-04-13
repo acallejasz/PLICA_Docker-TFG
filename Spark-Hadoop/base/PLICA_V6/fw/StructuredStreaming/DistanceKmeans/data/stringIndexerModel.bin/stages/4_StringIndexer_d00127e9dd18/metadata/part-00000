@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1615808844168,"sparkVersion":"2.4.4","uid":"StringIndexer_d00127e9dd18","paramMap":{"handleInvalid":"keep","inputCol":"VPN Peer Gateway","outputCol":"VPN Peer Gateway_index"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_d00127e9dd18__output","stringOrderType":"frequencyDesc"}}

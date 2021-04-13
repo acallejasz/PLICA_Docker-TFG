@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1615808828020,"sparkVersion":"2.4.4","uid":"StringIndexer_5153839d7bb7","paramMap":{"inputCol":"ICMP Type","handleInvalid":"keep","outputCol":"ICMP Type_index"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_5153839d7bb7__output","stringOrderType":"frequencyDesc"}}

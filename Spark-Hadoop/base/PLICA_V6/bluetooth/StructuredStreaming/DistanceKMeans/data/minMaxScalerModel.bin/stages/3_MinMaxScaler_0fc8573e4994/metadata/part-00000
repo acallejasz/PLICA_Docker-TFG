@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615228693643,"sparkVersion":"2.4.4","uid":"MinMaxScaler_0fc8573e4994","paramMap":{"outputCol":"nap_scaled","inputCol":"nap_vec"},"defaultParamMap":{"outputCol":"MinMaxScaler_0fc8573e4994__output","max":1.0,"min":0.0}}

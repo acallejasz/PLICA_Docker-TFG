@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615808851957,"sparkVersion":"2.4.4","uid":"MinMaxScaler_0439f965ed45","paramMap":{"outputCol":"VPN Peer Gateway_index_scaled","inputCol":"VPN Peer Gateway_index_vec"},"defaultParamMap":{"max":1.0,"outputCol":"MinMaxScaler_0439f965ed45__output","min":0.0}}

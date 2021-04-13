@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615808849031,"sparkVersion":"2.4.4","uid":"VectorAssembler_6a6c75662050","paramMap":{"inputCols":["Xlate (NAT) Source Port_index"],"outputCol":"Xlate (NAT) Source Port_index_vec"},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_6a6c75662050__output"}}

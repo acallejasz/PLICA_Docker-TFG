@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615227364252,"sparkVersion":"2.4.4","uid":"VectorAssembler_01ab930e8cb8","paramMap":{"outputCol":"features","inputCols":["hour","mod_ohe","signal_scaled","freq_scaled","data_features"]},"defaultParamMap":{"outputCol":"VectorAssembler_01ab930e8cb8__output","handleInvalid":"error"}}

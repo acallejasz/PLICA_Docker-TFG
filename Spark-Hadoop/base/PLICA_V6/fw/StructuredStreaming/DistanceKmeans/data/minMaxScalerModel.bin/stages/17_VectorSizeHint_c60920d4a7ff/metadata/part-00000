@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorSizeHint","timestamp":1615808853404,"sparkVersion":"2.4.4","uid":"VectorSizeHint_c60920d4a7ff","paramMap":{"inputCol":"VPN Peer Gateway_index_scaled","handleInvalid":"skip","size":1},"defaultParamMap":{"handleInvalid":"error"}}

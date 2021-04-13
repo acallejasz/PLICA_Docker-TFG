@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1615808830696,"sparkVersion":"2.4.4","uid":"StringIndexer_f261713e4c74","paramMap":{"outputCol":"VPN Feature_index","handleInvalid":"keep","inputCol":"VPN Feature"},"defaultParamMap":{"outputCol":"StringIndexer_f261713e4c74__output","handleInvalid":"error","stringOrderType":"frequencyDesc"}}

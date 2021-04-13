@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615808849447,"sparkVersion":"2.4.4","uid":"VectorAssembler_4cb02fcad8bd","paramMap":{"outputCol":"VPN Peer Gateway_index_vec","inputCols":["VPN Peer Gateway_index"]},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_4cb02fcad8bd__output"}}

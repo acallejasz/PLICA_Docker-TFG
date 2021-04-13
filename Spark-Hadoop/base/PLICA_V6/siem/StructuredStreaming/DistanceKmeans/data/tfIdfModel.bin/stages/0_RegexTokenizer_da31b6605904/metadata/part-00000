@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.RegexTokenizer","timestamp":1614082793800,"sparkVersion":"2.4.4","uid":"RegexTokenizer_da31b6605904","paramMap":{"outputCol":"datastring","inputCol":"Signature","pattern":" "},"defaultParamMap":{"toLowercase":true,"minTokenLength":1,"outputCol":"RegexTokenizer_da31b6605904__output","gaps":true,"pattern":"\\s+"}}

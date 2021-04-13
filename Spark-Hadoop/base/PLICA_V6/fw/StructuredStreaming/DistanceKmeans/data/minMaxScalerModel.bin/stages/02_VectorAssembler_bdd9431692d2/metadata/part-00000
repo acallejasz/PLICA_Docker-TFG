@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615808848822,"sparkVersion":"2.4.4","uid":"VectorAssembler_bdd9431692d2","paramMap":{"inputCols":["Destination Port_index"],"outputCol":"Destination Port_index_vec"},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_bdd9431692d2__output"}}

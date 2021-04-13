@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615324552240,"sparkVersion":"2.4.4","uid":"VectorAssembler_ede83dd211b2","paramMap":{"outputCol":"nic_footprint_index_vec","inputCols":["nic_footprint_index"]},"defaultParamMap":{"outputCol":"VectorAssembler_ede83dd211b2__output","handleInvalid":"error"}}

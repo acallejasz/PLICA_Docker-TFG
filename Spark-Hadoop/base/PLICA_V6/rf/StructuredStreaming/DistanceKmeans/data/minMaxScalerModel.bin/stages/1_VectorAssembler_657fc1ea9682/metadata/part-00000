@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615227360174,"sparkVersion":"2.4.4","uid":"VectorAssembler_657fc1ea9682","paramMap":{"inputCols":["freq"],"outputCol":"freq_vec"},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_657fc1ea9682__output"}}

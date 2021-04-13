@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808832390,"sparkVersion":"2.4.4","uid":"OneHotEncoder_efc58e959ce0","paramMap":{"inputCol":"Destination Zone_index","outputCol":"Destination Zone_ohe"},"defaultParamMap":{"outputCol":"OneHotEncoder_efc58e959ce0__output","dropLast":true}}

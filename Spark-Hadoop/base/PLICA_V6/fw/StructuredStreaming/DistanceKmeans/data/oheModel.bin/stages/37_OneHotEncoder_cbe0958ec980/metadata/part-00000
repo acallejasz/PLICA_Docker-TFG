@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808834845,"sparkVersion":"2.4.4","uid":"OneHotEncoder_cbe0958ec980","paramMap":{"outputCol":"VPN Feature_ohe","inputCol":"VPN Feature_index"},"defaultParamMap":{"outputCol":"OneHotEncoder_cbe0958ec980__output","dropLast":true}}

@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615324558087,"sparkVersion":"2.4.4","uid":"MinMaxScaler_ab952ac59403","paramMap":{"inputCol":"nic_userid_index_vec","outputCol":"nic_userid_index_scaled"},"defaultParamMap":{"min":0.0,"max":1.0,"outputCol":"MinMaxScaler_ab952ac59403__output"}}

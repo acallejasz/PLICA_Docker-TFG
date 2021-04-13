@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808834022,"sparkVersion":"2.4.4","uid":"OneHotEncoder_db8f750fa497","paramMap":{"inputCol":"Authentication Status_index","outputCol":"Authentication Status_ohe"},"defaultParamMap":{"outputCol":"OneHotEncoder_db8f750fa497__output","dropLast":true}}

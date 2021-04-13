@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615808848411,"sparkVersion":"2.4.4","uid":"VectorAssembler_cb427d543fe1","paramMap":{"outputCol":"Sequencenum_vec","inputCols":["Sequencenum"]},"defaultParamMap":{"outputCol":"VectorAssembler_cb427d543fe1__output","handleInvalid":"error"}}
