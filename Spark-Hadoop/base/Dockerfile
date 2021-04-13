@@ -21,4 +21,4 @@ RUN apk update \
   && /usr/bin/python3.7 -m pip install --upgrade pip \
   && pip3 install -r /app/requirements.txt 
 
-COPY PLICA_V6 /app
+#COPY PLICA_V6 /app
