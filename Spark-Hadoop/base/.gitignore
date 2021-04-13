@@ -6,10 +6,13 @@
 /PLICA_V6/rf/*
 /PLICA_V6/rm/*
 /PLICA_V6/siem/*
+.ipynb_checkpoints
+data
+*.ipynb
 
 
 # Not ignore
-!*/wifi/StructuredStreaming/
+!*/wifi/StructuredStreaming 
 !*/bluetooth/StructuredStreaming/
 !*/fw/StructuredStreaming/
 !*/rf/StructuredStreaming/
