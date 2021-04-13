@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808831775,"sparkVersion":"2.4.4","uid":"OneHotEncoder_919e80eca1eb","paramMap":{"outputCol":"Interface Direction_ohe","inputCol":"Interface Direction_index"},"defaultParamMap":{"dropLast":true,"outputCol":"OneHotEncoder_919e80eca1eb__output"}}

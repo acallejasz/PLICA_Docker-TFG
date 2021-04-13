@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808832590,"sparkVersion":"2.4.4","uid":"OneHotEncoder_b55754c0b08b","paramMap":{"inputCol":"IP Protocol_index","outputCol":"IP Protocol_ohe"},"defaultParamMap":{"dropLast":true,"outputCol":"OneHotEncoder_b55754c0b08b__output"}}

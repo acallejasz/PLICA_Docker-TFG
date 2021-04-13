@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.OneHotEncoder","timestamp":1615808832791,"sparkVersion":"2.4.4","uid":"OneHotEncoder_aa7da1d7abd6","paramMap":{"inputCol":"Product Family_index","outputCol":"Product Family_ohe"},"defaultParamMap":{"outputCol":"OneHotEncoder_aa7da1d7abd6__output","dropLast":true}}

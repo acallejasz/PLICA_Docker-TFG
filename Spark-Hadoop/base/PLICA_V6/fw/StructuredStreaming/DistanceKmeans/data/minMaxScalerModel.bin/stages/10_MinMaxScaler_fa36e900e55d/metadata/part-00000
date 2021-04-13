@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615808851517,"sparkVersion":"2.4.4","uid":"MinMaxScaler_fa36e900e55d","paramMap":{"outputCol":"Xlate (NAT) Destination Port_index_scaled","inputCol":"Xlate (NAT) Destination Port_index_vec"},"defaultParamMap":{"outputCol":"MinMaxScaler_fa36e900e55d__output","max":1.0,"min":0.0}}

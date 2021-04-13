@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorSizeHint","timestamp":1615324560313,"sparkVersion":"2.4.4","uid":"VectorSizeHint_a90e41fea227","paramMap":{"handleInvalid":"skip","size":1,"inputCol":"act24h_scaled"},"defaultParamMap":{"handleInvalid":"error"}}

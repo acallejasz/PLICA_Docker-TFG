@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615324559063,"sparkVersion":"2.4.4","uid":"MinMaxScaler_b4ce1a8b70b4","paramMap":{"outputCol":"nic_footprint_index_scaled","inputCol":"nic_footprint_index_vec"},"defaultParamMap":{"min":0.0,"outputCol":"MinMaxScaler_b4ce1a8b70b4__output","max":1.0}}

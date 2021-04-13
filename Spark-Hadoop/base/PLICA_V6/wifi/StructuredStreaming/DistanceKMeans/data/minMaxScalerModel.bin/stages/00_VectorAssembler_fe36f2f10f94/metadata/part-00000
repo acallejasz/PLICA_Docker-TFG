@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1615324548959,"sparkVersion":"2.4.4","uid":"VectorAssembler_fe36f2f10f94","paramMap":{"outputCol":"tseen_vec","inputCols":["tseen"]},"defaultParamMap":{"handleInvalid":"error","outputCol":"VectorAssembler_fe36f2f10f94__output"}}

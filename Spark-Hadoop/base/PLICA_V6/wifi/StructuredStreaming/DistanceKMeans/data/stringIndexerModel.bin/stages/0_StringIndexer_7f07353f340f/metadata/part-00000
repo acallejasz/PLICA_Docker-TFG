@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1615324540175,"sparkVersion":"2.4.4","uid":"StringIndexer_7f07353f340f","paramMap":{"outputCol":"oui_userid_index","inputCol":"oui_userid","handleInvalid":"keep"},"defaultParamMap":{"stringOrderType":"frequencyDesc","outputCol":"StringIndexer_7f07353f340f__output","handleInvalid":"error"}}

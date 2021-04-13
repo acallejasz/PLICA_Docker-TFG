@@ -1,2 +1,15 @@
 # Dependencies
-/PLICA_V6
+/PLICA_V6/wifi/*
+/PLICA_V6/bluetooth/*
+/PLICA_V6/fw/*
+/PLICA_V6/rf/*
+/PLICA_V6/rm/*
+/PLICA_V6/siem/*
+
+# Not ignore
+!*/wifi/StructuredStreaming/
+!*/bluetooth/StructuredStreaming/
+!*/fw/StructuredStreaming/
+!*/rf/StructuredStreaming/
+!*/rm/StructuredStreaming/
+!*/siem/StructuredStreaming/

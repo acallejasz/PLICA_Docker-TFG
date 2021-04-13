@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.MinMaxScalerModel","timestamp":1615324554072,"sparkVersion":"2.4.4","uid":"MinMaxScaler_2aa0913e270e","paramMap":{"outputCol":"act24h_scaled","inputCol":"act24h_vec"},"defaultParamMap":{"max":1.0,"outputCol":"MinMaxScaler_2aa0913e270e__output","min":0.0}}
