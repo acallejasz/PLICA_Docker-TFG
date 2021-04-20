@@ -1,0 +1,2 @@
+Dentro del dataset llamado "dataset_rf_v2&v3.json", se detecta como eventos todos aquellos cuyo payload tenga caracteres distintos a "e","8" y "0".
+Se ha puesto como ejemplo algunos eventos anomalos en el fichero "dataset_ej.json"

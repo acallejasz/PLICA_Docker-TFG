@@ -1,0 +1,6 @@
+---Eventos normales anteriores pero en hora no comun---
+
+{"version": "2.0", "time": "1615512478", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1615512478", "imei": "NA", "imsi": "214226440301979", "rat": "3G"}}
+{"version": "2.0", "time": "1615509874", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1615509874", "imei": "354577068966943", "imsi": "214058184249024", "rat": "2G"}}
+{"version": "2.0", "time": "1615509981", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1615509981", "imei": "869552047778758", "imsi": "214213036188143", "rat": "2G"}}
+{"version": "2.0", "time": "1615524475", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1615524475", "imei": "NA", "imsi": "214225800167852", "rat": "4G"}}

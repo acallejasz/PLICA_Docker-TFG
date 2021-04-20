@@ -1,0 +1,2 @@
+Las anomalias temporalas probadas y detectadas son los datos del dataset "dataset_rf_v2&v3.json" con hora 16 que se ha replicado  a una ventana (00:00 - 04:00).
+Se han puesto algunos ejemplos de los datos replicados en esa ventana temporal en el fichero "dataset_ej.txt". NOTA: Esos ejemplos tiene la hora original sin desplazar
