@@ -33,4 +33,12 @@ Para este módulo simplemente se utilizan las imagenes oficiales proporcionadas 
 
 ## Spark-Hadoop
 
-User el docker-compose.yml con --scale spark-base=0 (Se necesita contruir la imagen pero no hay que levantarla)
+Usar el docker-compose.yml con --scale spark-base=0 (Se necesita contruir la imagen pero no hay que levantarla). TRas esto utilizar el script con ./startPy.sh $1, donde se añada el tipo de aplicación que se quiere desplegar en spark (wifi,bluetooth,etc). Se cuenta con un docker-compose adicional con el que se pueden escalar nuevos workers dentro de la carpeta /Spark-Hadoop/worker.
+
+## Elastalert
+
+Basta con arrancar el compose global. Si se quiere probar individualmente con su compose recordar eliminar el sleep y tener siempre levantado el contenedor de elasticsearch.
+
+## Otras caracteristicas
+
+Se encuentra habilitado el acceso por ssh a todos los contenedores (Elasticsearch y kibana pendientes)
