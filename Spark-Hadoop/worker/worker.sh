@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Start ssh server 
+
+/usr/sbin/sshd
+
+# Start master
+
 export SPARK_HOME=/spark
 
 . "/spark/sbin/spark-config.sh"
