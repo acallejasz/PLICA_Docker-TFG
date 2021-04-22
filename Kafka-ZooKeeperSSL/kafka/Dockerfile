@@ -1,5 +1,3 @@
-#Dockerfile for Kafka
-
 FROM openjdk:8u212-jre-alpine
 
 ARG kafka_version=2.7.0
@@ -24,9 +22,12 @@ ENV KAFKA_VERSION=$kafka_version \
 
 COPY start-kafka.sh start-broker.sh broker-list.sh create-topics.sh versions.sh kafka_certs.sh kafka_server_jaas.conf consumer_ssl.properties producer_ssl.properties /tmp/
 
+COPY enable_ssh.sh id_rsa.pub /
+
 #Install and config
 
-RUN apk add --no-cache bash openssl docker \
+RUN apk add --no-cache bash openssl docker openssh openssh-server-pam \
+ && ./enable_ssh.sh \
  && chmod a+x /tmp/*.sh \
  && mv /tmp/start-kafka.sh /tmp/start-broker.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /tmp/kafka_certs.sh /tmp/kafka_server_jaas.conf /usr/bin \
  && sync && wget https://ftp.cixug.es/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
@@ -41,5 +42,7 @@ RUN apk add --no-cache bash openssl docker \
  && rm glibc-${GLIBC_VERSION}.apk
 
 COPY overrides /opt/overrides
+
+EXPOSE 22
 
 CMD ["start-kafka.sh"]
