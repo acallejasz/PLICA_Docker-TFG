@@ -62,6 +62,7 @@ services:
       PLICA:
         ipv4_address: 172.22.0.2
     volumes:
+      - ./base/PLICA_V6/:/app 
       - logs:/logs  
   worker:
     build:
@@ -78,6 +79,8 @@ services:
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
       SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
+    volumes:
+      - ./base/PLICA_V6/:/app
     networks:
       PLICA:
 networks:

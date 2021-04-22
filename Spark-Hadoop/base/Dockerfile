@@ -5,7 +5,7 @@ ARG HADOOP_VERSION
 
 LABEL org.label-schema.name="spark" \
       org.label-schema.description="Apache spark" \
-      org.label-schema.version="${spark_version}_${hadoop_version}" \
+      org.label-schema.version="${SPARK_VERSION}_${HADOOP_VERSION}" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
 
