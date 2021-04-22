@@ -170,6 +170,29 @@ services:
     volumes:
       - ./Spark-Hadoop/base/PLICA_V6/:/app     
 
+  elastalert:
+    build:
+      context: Elastalert/
+      args:  
+        ELASTALERT_VERSION: ${ELASTALERT_VERSION}
+    image: elastalert:${ELASTALERT_VERSION}
+    container_name: elastalert
+    depends_on:
+      - elasticsearch
+    environment:
+      TZ: ${TZ}
+      ELASTICSEARCH_IP: ${ELASTICSEARCH_IP}
+      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    networks:
+      ELASTALERT:
+        ipv4_address: 172.23.0.2
+    volumes:
+        - ./Elastalert/configFiles/:/opt/config
+        - ./Elastalert/rules:/opt/rules
+        - /var/run/docker.sock:/var/run/docker.sock
+
 networks:
   KAFKA:
     driver: bridge
@@ -192,7 +215,13 @@ networks:
       config:
         - subnet: 172.22.0.0/24
           gateway: 172.22.0.1  
-
+  ELASTALERT:
+    driver: bridge
+    ipam:
+      driver: default 
+      config:
+        - subnet: 172.23.0.0/24
+          gateway: 172.23.0.1        
 volumes:
   kafka_config: 
   elasticsearch:
