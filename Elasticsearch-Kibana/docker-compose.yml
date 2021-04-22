@@ -35,7 +35,7 @@ services:
       context: kibana/
       args:
         EK_VERSION: ${EK_VERSION}
-    image: kibana:${EK_VERSION}    
+    image: kibana:${EK_VERSION}   
     container_name: kibana        
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
