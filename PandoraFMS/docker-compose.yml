@@ -3,6 +3,6 @@ services:
   ubuntu-pandora:
     build:
       context: ./
-    image: ubuntu-pandora
+    image: ubuntu-pandora:base
     container_name: elastalert
     
