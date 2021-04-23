@@ -1,8 +1,0 @@
-version: '3.9'
-services:
-  ubuntu-pandora:
-    build:
-      context: ./
-    image: ubuntu-pandora:base
-    container_name: elastalert
-    

@@ -7,6 +7,7 @@ if [ -z "${AUTHORIZED_KEYS}" ]; then
   exit 1
 fi
 
+rm -rf id_rsa.pub
 mkdir /root/.ssh 
 chmod 0700 /root/.ssh 
 ssh-keygen -A 
