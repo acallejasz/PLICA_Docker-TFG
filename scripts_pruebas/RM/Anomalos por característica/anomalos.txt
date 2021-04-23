@@ -1,3 +1,0 @@
-{"version":"1.0","time":"1596044533","id":"de539085-315f-466a-81c1-55b97f5348df","type":"RM","event":"DATA","data":{"time":"1596039963","imei":"01366500442359","imsi":"901700000015708","rat":"2G"}}
-{"version": "1.0", "time": "1611677702", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1611676226", "imei": "NA", "imsi": "901700000015704", "rat": "3G"}}
-{"version": "1.0", "time": "1611741121", "id": "de539085-315f-466a-81c1-55b97f5348df", "type": "RM", "event": "DATA", "data": {"time": "1611741121", "imei": "NA", "imsi": "901700000013638", "rat": "4G"}}
