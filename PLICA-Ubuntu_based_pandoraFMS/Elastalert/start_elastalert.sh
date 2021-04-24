@@ -6,7 +6,7 @@
 
 service pandora_agent_daemon start
 
-sleep 2m
+sleep 1m
 
 elastalert-create-index --config /opt/config/config_correlacion_conjunta.yaml
 elastalert-create-index --config /opt/config/config_correlacion_individual.yaml

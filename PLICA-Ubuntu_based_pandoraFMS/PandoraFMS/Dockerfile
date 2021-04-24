@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-LABEL org.label-schema.name="pandasfms" \
-      org.label-schema.description="PandasFMS" \
-      org.label-schema.version="${SPARK_VERSION}_${HADOOP_VERSION}" \
+LABEL org.label-schema.name="pandorafms" \
+      org.label-schema.description="PandoraFMS" \
+      org.label-schema.version="0.24" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
 
@@ -19,6 +19,3 @@ RUN apt-get update \
   && rm -rf enable_ssh
 
 EXPOSE 22
-
-# service pandora_agent_daemon start
-# usr/sbin/sshd
