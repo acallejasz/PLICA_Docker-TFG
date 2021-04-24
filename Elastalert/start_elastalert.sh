@@ -13,7 +13,7 @@ if [ -z "${elastic_id}" ]; then
     exit 0
 fi
 
-sleep 1m
+sleep 2m
 
 elastalert-create-index --config /opt/config/config_correlacion_conjunta.yaml
 elastalert-create-index --config /opt/config/config_correlacion_individual.yaml
