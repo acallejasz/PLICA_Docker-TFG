@@ -3,7 +3,7 @@ services:
 
   zookeeper:
     build: 
-      context: zookeeper/
+      context: zookeeper/ 
       args:
         ZOOKEEPER_VERSION: ${ZOOKEEPER_VERSION}
         ZK_HOME: ${ZK_HOME}
