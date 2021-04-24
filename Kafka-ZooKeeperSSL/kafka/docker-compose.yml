@@ -3,7 +3,7 @@ services:
 
   zookeeper:
     build: ../zookeeper/.
-    image: acallejasz/zookeeper
+    image: acallejasz/zookeeper 
     container_name: zookeeper
     networks:
       PLICA:
