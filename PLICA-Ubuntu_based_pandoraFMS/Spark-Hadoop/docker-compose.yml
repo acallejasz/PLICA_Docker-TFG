@@ -1,0 +1,95 @@
+version: '3.9'
+services:
+  spark-base:
+    build:
+      context: base/
+      args:  
+        SPARK_VERSION: ${SPARK_VERSION}
+        HADOOP_VERSION: ${HADOOP_VERSION}
+    image: spark_base
+    container_name: (Use --scale spark-base=0)
+    environment:
+      PYTHONHASHSEED: ${PYTHONHASHSEED}
+    networks:
+      PLICA: 
+  spark-master:
+    build:
+      context: master/
+      args:  
+        SPARK_VERSION: ${SPARK_VERSION}
+        HADOOP_VERSION: ${HADOOP_VERSION}
+    image: spark-master:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
+    container_name: spark-master
+    environment:
+      SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
+      SPARK_MASTER_WEBUI_PORT: ${SPARK_MASTER_WEBUI_PORT}
+      SPARK_MASTER_LOG: ${SPARK_MASTER_LOG}
+      SPARK_MASTER_NAME: ${SPARK_MASTER_NAME}
+      SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
+      SPARK_SUBMIT_ARGS: ${SPARK_SUBMIT_ARGS}
+      #Kafka
+      KAFKA_BROKER: ${KAFKA_BROKER}
+      WF_TOPIC: ${WF_TOPIC}
+      BT_TOPIC: ${BT_TOPIC}
+      FW_TOPIC: ${FW_TOPIC}
+      RF_TOPIC: ${RF_TOPIC}
+      RM_TOPIC: ${RM_TOPIC}
+      SM_TOPIC: ${SM_TOPIC}
+      #Elastic
+      ELASTICSEARCH_IP: ${ELASTICSEARCH_IP}
+      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      #Python
+        #Files
+      SPARK_APPLICATION_PYTHON_LOCATION_WF: ${SPARK_APPLICATION_PYTHON_LOCATION_WF}
+      SPARK_APPLICATION_PYTHON_LOCATION_BT: ${SPARK_APPLICATION_PYTHON_LOCATION_BT}
+      SPARK_APPLICATION_PYTHON_LOCATION_FW: ${SPARK_APPLICATION_PYTHON_LOCATION_FW}
+      SPARK_APPLICATION_PYTHON_LOCATION_RF: ${SPARK_APPLICATION_PYTHON_LOCATION_RF}
+      SPARK_APPLICATION_PYTHON_LOCATION_RM: ${SPARK_APPLICATION_PYTHON_LOCATION_RM}
+      SPARK_APPLICATION_PYTHON_LOCATION_SM: ${SPARK_APPLICATION_PYTHON_LOCATION_SM}
+        # Logs
+      SPARK_APPLICATION_LOG_WF: ${SPARK_APPLICATION_LOG_WF}
+      SPARK_APPLICATION_LOG_BT: ${SPARK_APPLICATION_LOG_BT}
+      SPARK_APPLICATION_LOG_FW: ${SPARK_APPLICATION_LOG_FW}
+      SPARK_APPLICATION_LOG_RF: ${SPARK_APPLICATION_LOG_RF}
+      SPARK_APPLICATION_LOG_RM: ${SPARK_APPLICATION_LOG_RM}
+      SPARK_APPLICATION_LOG_SM: ${SPARK_APPLICATION_LOG_SM}
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    networks:
+      PLICA:
+        ipv4_address: 172.22.0.2
+    volumes:
+      - ./base/PLICA_V6/:/app 
+      - logs:/logs  
+  worker:
+    build:
+      context: worker/
+      args:  
+        SPARK_VERSION: ${SPARK_VERSION}
+        HADOOP_VERSION: ${HADOOP_VERSION}
+    image: spark-worker:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
+    depends_on:
+      - spark-master
+    environment:
+      SPARK_MASTER: ${SPARK_MASTER}
+      SPARK_WORKER_WEBUI_PORT: ${SPARK_WORKER_WEBUI_PORT} 
+      SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
+      SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
+      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
+    volumes:
+      - ./base/PLICA_V6/:/app
+    networks:
+      PLICA:
+networks:
+  PLICA:
+    driver: bridge
+    ipam:
+      driver: default 
+      config:
+        - subnet: 172.22.0.0/24
+          gateway: 172.22.0.1
+volumes:
+  logs: 

@@ -1,0 +1,24 @@
+FROM ubuntu:18.04
+
+LABEL org.label-schema.name="pandasfms" \
+      org.label-schema.description="PandasFMS" \
+      org.label-schema.version="${SPARK_VERSION}_${HADOOP_VERSION}" \
+      org.label-schema.schema-version="1.0" \
+      maintainer="acallejasz"
+
+COPY enable_ssh.sh id_rsa.pub /
+
+RUN apt-get update \
+  && ln -fs /usr/share/zoneinfo/Europe/Madrid /etc/localtime \
+  && apt-get install -y tzdata \
+  && apt-get install -y wget dpkg perl unzip  openssh-server \
+  && wget https://sourceforge.net/projects/pandora/files/Pandora%20FMS%207.0NG/753/Debian_Ubuntu/pandorafms.agent_unix_7.0NG.753.deb/download \
+  && dpkg -i download \
+  && rm -rf download \
+  && ./enable_ssh.sh \
+  && rm -rf enable_ssh
+
+EXPOSE 22
+
+# service pandora_agent_daemon start
+# usr/sbin/sshd

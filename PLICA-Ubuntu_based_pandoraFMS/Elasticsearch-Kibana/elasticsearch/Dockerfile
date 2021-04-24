@@ -1,0 +1,2 @@
+ARG EK_VERSION
+FROM elasticsearch:${EK_VERSION}

@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  worker:
+    image: spark-worker:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
+    environment:
+      SPARK_MASTER: ${SPARK_MASTER}
+      SPARK_WORKER_WEBUI_PORT: ${SPARK_WORKER_WEBUI_PORT} 
+      SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
+      SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
+      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
+    networks:
+      plica_SPARK:
+networks:
+  plica_SPARK:
+    external: true

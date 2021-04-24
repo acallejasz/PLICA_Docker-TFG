@@ -1,0 +1,6 @@
+{"version":1,"time":1613628062,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613628032","signal":"-87","freq":"433.78","mod":"OOK","payload":"2d9fffffffffffffffffffffff"}},
+{"version":1,"time":1613607902,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613607853","signal":"-89","freq":"433.78","mod":"OOK","payload":"00005083ddfdafffffffffffff"}},
+{"version":1,"time":1613597462,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613597460","signal":"-88","freq":"433.78","mod":"OOK","payload":"0000100010004c2a83fffff7ff"}},
+{"version":1,"time":1613585042,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613585040","signal":"-83","freq":"433.78","mod":"OOK","payload":"0a0093df1feff7ffffffffffff"}},
+{"version":1,"time":1613588342,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613588338","signal":"-85","freq":"433.78","mod":"OOK","payload":"9192f86ff7ffdfbfffffffffff"}},
+{"version":1,"time":1613585042,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613585040","signal":"-83","freq":"433.78","mod":"OOK","payload":"0a0093df1feff7ffffffffffff"}}

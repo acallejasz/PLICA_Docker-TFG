@@ -1,0 +1,5 @@
+{"version":1,"time":1613995116,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1599497306","signal":"-68","freq":"433.78","mod":"OOK","payload":"e8e8e8e88888e8e888e8e8e800"}},
+{"version":1,"time":1613995116,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1599497306","signal":"-57","freq":"433.78","mod":"OOK","payload":"e8e8e8e88888e8eee8e8e8e800"}},
+{"version":1,"time":1613995116,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1599497307","signal":"-58","freq":"433.78","mod":"OOK","payload":"e8e8e8e88888e8e888e8e88800"}},
+{"version":1,"time":1613995116,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1599497307","signal":"-57","freq":"433.78","mod":"OOK","payload":"e8e8e8e8eee8e8eee8e8e8e800"}},
+{"version":1,"time":1613721842,"id":"29897b89-b50d-475f-a4d4-ba9876543210","type":"RF","event":"DATA","data":{"time":"1613721842","signal":"-91","freq":"433.78","mod":"OOK","payload":"e888e8e8eee8e8eee8e8e8e800"}}

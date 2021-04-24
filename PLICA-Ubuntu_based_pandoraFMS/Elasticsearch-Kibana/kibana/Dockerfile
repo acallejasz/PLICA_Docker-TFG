@@ -1,0 +1,3 @@
+ARG EK_VERSION
+FROM kibana:${EK_VERSION}
+
