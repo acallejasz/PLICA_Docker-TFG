@@ -4,6 +4,8 @@
 
 /usr/sbin/sshd
 
+sleep 3m
+
 elastic_id=$(docker ps -q --filter "name=elasticsearch")
 
 if [ -z "${elastic_id}" ]; then
@@ -12,8 +14,6 @@ if [ -z "${elastic_id}" ]; then
     echo
     exit 0
 fi
-
-sleep 4m
 
 elastalert-create-index --config /opt/config/config_correlacion_conjunta.yaml
 elastalert-create-index --config /opt/config/config_correlacion_individual.yaml
