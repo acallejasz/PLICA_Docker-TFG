@@ -7,7 +7,9 @@ services:
       SPARK_WORKER_WEBUI_PORT: ${SPARK_WORKER_WEBUI_PORT} 
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
-      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
+      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY}
+    ports:
+      - "22"     
     networks:
       plica_SPARK:
     volumes:
