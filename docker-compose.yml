@@ -11,6 +11,7 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+      - "23:22"
     networks:
       KAFKA:
         ipv4_address: 172.20.0.11
@@ -32,6 +33,7 @@ services:
       KAFKA_HOME: ${KAFKA_HOME}
     ports:
       - "9092:9092"
+      - "24:22"
     networks:
       KAFKA:
         ipv4_address: 172.20.0.2
@@ -143,6 +145,7 @@ services:
     ports:
       - "8080:8080"
       - "7077:7077"
+      - "25:22"
     networks:
       SPARK:
         ipv4_address: 172.22.0.2
@@ -164,7 +167,9 @@ services:
       SPARK_WORKER_WEBUI_PORT: ${SPARK_WORKER_WEBUI_PORT} 
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
-      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY} 
+      SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY}
+    ports:
+      - "26:22" 
     networks:
       SPARK:
     volumes:
@@ -185,6 +190,8 @@ services:
       ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    ports:
+      - "27:22"   
     networks:
       ELASTALERT:
         ipv4_address: 172.23.0.2
