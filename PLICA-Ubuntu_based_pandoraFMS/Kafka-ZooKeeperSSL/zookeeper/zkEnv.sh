@@ -146,14 +146,14 @@ export SERVER_JVMFLAGS="
 -Djava.security.auth.login.config=${ZK_HOME}/zookeeper_jaas.conf
 -Dzookeeper.serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
 -Dzookeeper.authProvider.sasl=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
--Dzookeeper.ssl.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.keyStore.password=xxxxxxxx
--Dzookeeper.ssl.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks
--Dzookeeper.ssl.trustStore.password=xxxxxxxx
--Dzookeeper.ssl.quorum.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.quorum.keyStore.password=xxxxxxxx
--Dzookeeper.ssl.quorum.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks
--Dzookeeper.ssl.quorum.trustStore.password=xxxxxxxx
+-Dzookeeper.ssl.keyStore.location=${ZOOKEEPER_KEYSTORE_LOCATION}
+-Dzookeeper.ssl.keyStore.password=${ZOOKEEPER_KEYSTORE_PASSWORD}
+-Dzookeeper.ssl.trustStore.location=${ZOOKEEPER_TRUSTSTORE_LOCATION}
+-Dzookeeper.ssl.trustStore.password=${ZOOKEEPER_TRUSTSTORE_PASSWORD}
+-Dzookeeper.ssl.quorum.keyStore.location=${ZOOKEEPER_KEYSTORE_LOCATION}
+-Dzookeeper.ssl.quorum.keyStore.password=${ZOOKEEPER_KEYSTORE_PASSWORD}
+-Dzookeeper.ssl.quorum.trustStore.location=${ZOOKEEPER_TRUSTSTORE_LOCATION}
+-Dzookeeper.ssl.quorum.trustStore.password=${ZOOKEEPER_TRUSTSTORE_PASSWORD}
 -Dzookeeper.ssl.quorum.hostnameVerification=false
 "
 
@@ -162,8 +162,8 @@ ZK_CLIENT_HEAP="${ZK_CLIENT_HEAP:-256}"
 export CLIENT_JVMFLAGS="
 -Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty 
 -Dzookeeper.client.secure=true 
--Dzookeeper.ssl.keyStore.location=/var/ssl/private/zookeeper.server.keystore.jks
--Dzookeeper.ssl.keyStore.password=xxxxxxxx 
--Dzookeeper.ssl.trustStore.location=/var/ssl/private/zookeeper.server.truststore.jks 
--Dzookeeper.ssl.trustStore.password=xxxxxxxx"
+-Dzookeeper.ssl.keyStore.location=${ZOOKEEPER_KEYSTORE_LOCATION}
+-Dzookeeper.ssl.keyStore.password=${ZOOKEEPER_KEYSTORE_PASSWORD}
+-Dzookeeper.ssl.trustStore.location=${ZOOKEEPER_TRUSTSTORE_LOCATION}
+-Dzookeeper.ssl.trustStore.password=${ZOOKEEPER_TRUSTSTORE_PASSWORD}"
 

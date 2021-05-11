@@ -6,6 +6,27 @@
 
 service pandora_agent_daemon start
 
+# Configure SSL.properties files
+
+    #Producer
+
+sed -i '2c\bootstrap.servers='"${KAFKA_ADVERTISED_HOST_NAME}"':'"${KAFKA_SECURE_PORT}" ${KAFKA_HOME}/config/producer_ssl.properties
+sed -i '5c\ssl.truststore.location='"${KAFKA_STORE_WORKING_DIRECTORY}"'/'"${KAFKA_CLIENT_TRUSTSTORE_FILENAME}" ${KAFKA_HOME}/config/producer_ssl.properties
+sed -i '6c\ssl.truststore.password='"${KAFKA_TRUSTSTORE_PASSWORD}" ${KAFKA_HOME}/config/producer_ssl.properties
+sed -i '7c\ssl.keystore.location='"${KAFKA_STORE_WORKING_DIRECTORY}"'/'"${KAFKA_KEYSTORE_CLIENT_FILENAME}" ${KAFKA_HOME}/config/producer_ssl.properties
+sed -i '8c\ssl.keystore.password='"${KAFKA_KEYSTORE_PASSWORD}" ${KAFKA_HOME}/config/producer_ssl.properties
+sed -i '9c\ssl.key.password='"${KAFKA_TRUSTSTORE_PASSWORD}" ${KAFKA_HOME}/config/producer_ssl.properties
+
+    #Consumer
+
+sed -i '2c\bootstrap.servers='"${KAFKA_ADVERTISED_HOST_NAME}"':'"${KAFKA_SECURE_PORT}" ${KAFKA_HOME}/config/consumer_ssl.properties
+sed -i '5c\ssl.truststore.location='"${KAFKA_STORE_WORKING_DIRECTORY}"'/'"${KAFKA_CLIENT_TRUSTSTORE_FILENAME}" ${KAFKA_HOME}/config/consumer_ssl.properties
+sed -i '6c\ssl.truststore.password='"${KAFKA_TRUSTSTORE_PASSWORD}" ${KAFKA_HOME}/config/consumer_ssl.properties
+sed -i '7c\ssl.keystore.location='"${KAFKA_STORE_WORKING_DIRECTORY}"'/'"${KAFKA_KEYSTORE_CLIENT_FILENAME}" ${KAFKA_HOME}/config/consumer_ssl.properties
+sed -i '8c\ssl.keystore.password='"${KAFKA_KEYSTORE_PASSWORD}" ${KAFKA_HOME}/config/consumer_ssl.properties
+sed -i '9c\ssl.key.password='"${KAFKA_TRUSTSTORE_PASSWORD}" ${KAFKA_HOME}/config/consumer_ssl.properties
+
+
 # Allow specific kafka versions to perform any unique bootstrap operations
 OVERRIDE_FILE="/opt/overrides/${KAFKA_VERSION}.sh"
 if [[ -x "$OVERRIDE_FILE" ]]; then
@@ -159,27 +180,27 @@ echo "" >> "$KAFKA_HOME/config/server.properties"
     updateConfig "zookeeper.ssl.client.enable" "true" "$KAFKA_HOME/config/server.properties"
     updateConfig "zookeeper.client.secure" "true" "$KAFKA_HOME/config/server.properties"
     updateConfig "zookeeper.clientCnxnSocket" "org.apache.zookeeper.ClientCnxnSocketNetty" "$KAFKA_HOME/config/server.properties"
-    updateConfig "zookeeper.ssl.keystore.location" "/var/ssl/private/zookeeper/zookeeper.server.keystore.jks" "$KAFKA_HOME/config/server.properties"
-    updateConfig "zookeeper.ssl.keystore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
-    updateConfig "zookeeper.ssl.truststore.location" "/var/ssl/private/zookeeper/zookeeper.server.truststore.jks" "$KAFKA_HOME/config/server.properties"
-    updateConfig "zookeeper.ssl.truststore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.keystore.location" "${ZOOKEEPER_KEYSTORE_LOCATION}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.keystore.password" "${ZOOKEEPER_KEYSTORE_PASSWORD}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.truststore.location" "${ZOOKEEPER_TRUSTSTORE_LOCATION}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "zookeeper.ssl.truststore.password" "${ZOOKEEPER_TRUSTSTORE_PASSWORD}" "$KAFKA_HOME/config/server.properties"
 
         # Enable SSL security protocol for inter-broker communication
         # Enable SASL_SSL security protocol for broker-client communication
 
-    updateConfig "listeners" "PLAINTEXT://:9092,SSL://:9093,SASL_SSL://:9094" "$KAFKA_HOME/config/server.properties"
-    updateConfig "advertised.listeners" "PLAINTEXT://$KAFKA_ADVERTISED_HOST_NAME:9092,SSL://$KAFKA_ADVERTISED_HOST_NAME:9093,SASL_SSL://$KAFKA_ADVERTISED_HOST_NAME:9094" "$KAFKA_HOME/config/server.properties"
+    updateConfig "listeners" "PLAINTEXT://:9092,SSL://:${KAFKA_SECURE_PORT},SASL_SSL://:9094" "$KAFKA_HOME/config/server.properties"
+    updateConfig "advertised.listeners" "PLAINTEXT://$KAFKA_ADVERTISED_HOST_NAME:9092,SSL://${KAFKA_ADVERTISED_HOST_NAME}:${KAFKA_SECURE_PORT},SASL_SSL://$KAFKA_ADVERTISED_HOST_NAME:9094" "$KAFKA_HOME/config/server.properties"
     updateConfig "security.inter.broker.protocol" "SSL" "$KAFKA_HOME/config/server.properties"
     updateConfig "ssl.endpoint.identification.algorithm" """" "$KAFKA_HOME/config/server.properties"
     updateConfig "ssl.client.auth" "required" "$KAFKA_HOME/config/server.properties"
 
         # Broker security settings
 
-    updateConfig "ssl.truststore.location" "/var/ssl/private/kafka/kafka.server.truststore.jks" "$KAFKA_HOME/config/server.properties"
-    updateConfig "ssl.truststore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
-    updateConfig "ssl.keystore.location" "/var/ssl/private/kafka/kafka.server.keystore.jks" "$KAFKA_HOME/config/server.properties"
-    updateConfig "ssl.keystore.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
-    updateConfig "ssl.key.password" "xxxxxxxx" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.truststore.location" "${KAFKA_TRUSTSTORE_LOCATION}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.truststore.password" "${KAFKA_TRUSTSTORE_PASSWORD}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.keystore.location" "${KAFKA_KEYSTORE_LOCATION}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.keystore.password" "${KAFKA_KEYSTORE_PASSWORD}" "$KAFKA_HOME/config/server.properties"
+    updateConfig "ssl.key.password" "${KAFKA_TRUSTSTORE_PASSWORD}" "$KAFKA_HOME/config/server.properties"
     updateConfig "sasl.enabled.mechanisms" "PLAIN" "$KAFKA_HOME/config/server.properties"
     updateConfig "sasl.mechanism.inter.broker.protocol" "PLAIN" "$KAFKA_HOME/config/server.properties"
     updateConfig "authorizer.class.name" "kafka.security.auth.SimpleAclAuthorizer" "$KAFKA_HOME/config/server.properties"
