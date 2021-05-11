@@ -11,16 +11,16 @@
 # Filtrado por puertos expuestos, kafka comparte puerto con el conector de elastic
 # Se opta por el filtrado referenciado al nombre del contenedor levantado
 
-kafka_id=$(docker ps -q --filter "name=kafka")
-broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafka_PLICA)
-port=$(docker inspect kafka | grep HostPort | sort | uniq | grep -o [0-9]*)
+kafka_id=$(docker ps -q --filter "name=kafkaSSL")
+broker_ip=$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' kafkassl_PLICA)
+port=$(docker inspect kafkaSSL | grep HostPort | sort | uniq | grep -o [0-9]*)
 
 declare -a topics=("WF-DATA" "BT-DATA" "CS-DATA" "RF-DATA" "RM-DATA" "TI-DATA" "PF-DATA" "UBA-DATA")
 
 for i in "${topics[@]}"
 do
 	# Eliminacion de topics desde Kafka instalado en docker
-	sudo docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --bootstrap-server=$broker_ip:$port \
+	docker exec -itd $kafka_id /opt/kafka/bin/kafka-topics.sh --delete --bootstrap-server=$broker_ip:$port \
 	--command-config=/opt/kafka/config/producer_ssl.properties --topic "$i"
 
 done

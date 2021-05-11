@@ -1,22 +1,25 @@
 FROM openjdk:8u212-jre-alpine
 
-ARG kafka_version=2.7.0
-ARG scala_version=2.13
-ARG glibc_version=2.31-r0
-ARG brokers_number=3
+ARG KAFKA_VERSION
+ARG	SCALA_VERSION
+ARG	GLIBC_VERSION
+ARG KAFKA_HOME
+ARG KAFKA_ADVERTISED_HOST_NAME
+ARG BROKERS_NUMBER
+ARG KAFKA_KEYSTORE_FILENAME
+ARG KAFKA_KEYSTORE_CLIENT_FILENAME
+ARG KAFKA_TRUSTSTORE_FILENAME
+ARG KAFKA_CLIENT_TRUSTSTORE_FILENAME
+ARG KAFKA_STORE_WORKING_DIRECTORY
+ARG KAFKA_TRUSTSTORE_PASSWORD
 
 LABEL org.label-schema.name="kafka" \
       org.label-schema.description="Apache Kafka" \
-      org.label-schema.version="${scala_version}_${kafka_version}" \
+      org.label-schema.version="${SCALA_VERSION}_${KAFKA_VERSION}" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
 
-ENV KAFKA_VERSION=$kafka_version \
-    SCALA_VERSION=$scala_version \
-    KAFKA_HOME=/opt/kafka \
-    GLIBC_VERSION=$glibc_version \
-    BROKERS_NUMBER=$brokers_number \
-    PATH=${PATH}:${KAFKA_HOME}/bin
+ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
 #Installation and config scripts
 

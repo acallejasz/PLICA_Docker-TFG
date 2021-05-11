@@ -30,6 +30,15 @@ ZOOBIN="${BASH_SOURCE-$0}"
 ZOOBIN="$(dirname "${ZOOBIN}")"
 ZOOBINDIR="$(cd "${ZOOBIN}"; pwd)"
 
+# Configure SSL files
+
+sed -i '19c\secureClientPort='"${ZOOKEEPER_SECURE_PORT}" ${ZK_HOME}/conf/zoo.cfg
+sed -i '37c\ssl.quorum.keyStore.location='"${ZOOKEEPER_KEYSTORE_LOCATION}" ${ZK_HOME}/conf/zoo.cfg
+sed -i '38c\ssl.quorum.keyStore.password='"${ZOOKEEPER_KEYSTORE_PASSWORD}" ${ZK_HOME}/conf/zoo.cfg
+sed -i '39c\ssl.quorum.trustStore.location='"${ZOOKEEPER_TRUSTSTORE_LOCATION}" ${ZK_HOME}/conf/zoo.cfg
+sed -i '40c\ssl.quorum.trustStore.password='"${ZOOKEEPER_TRUSTSTORE_PASSWORD}" ${ZK_HOME}/conf/zoo.cfg
+
+
 if [ -e "$ZOOBIN/../libexec/zkEnv.sh" ]; then
   . "$ZOOBINDIR"/../libexec/zkEnv.sh
 else

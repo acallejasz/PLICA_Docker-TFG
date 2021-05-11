@@ -1,15 +1,18 @@
 FROM openjdk:8u212-jre-alpine
 
-ARG zookeeper_version=3.5.9
+ARG ZOOKEEPER_VERSION
+ARG ZK_HOME
+ARG ZOOKEEPER_IP
+ARG ZOOKEEPER_KEYSTORE_FILENAME
+ARG ZOOKEEPER_TRUSTSTORE_FILENAME
+ARG ZOOKEEPER_STORE_WORKING_DIRECTORY
+ARG ZOOKEEPER_TRUSTSTORE_PASSWORD
 
 LABEL org.label-schema.name="zookeeper" \
       org.label-schema.description="Apache ZooKeeper" \
-      org.label-schema.version="${zookeeper_version}" \
+      org.label-schema.version="${ZOOKEEPER_VERSION}" \
       org.label-schema.schema-version="1.0" \
       maintainer="acallejasz"
-
-ENV ZOOKEEPER_VERSION=$zookeeper_version \
-	ZK_HOME=/opt/zookeeper 
 
 COPY zookeeper_jaas.conf zookeeper_certs.sh zkEnv.sh zkServer.sh zoo.cfg /tmp/
 
@@ -30,7 +33,7 @@ RUN apk add --no-cache wget openssl bash openssh openssh-server-pam \
  && mv ${ZK_HOME}/zkServer.sh ${ZK_HOME}/bin/zkServer.sh \
  && mkdir -p /tmp/zookeeper \
  &&	mkdir ${ZK_HOME}/data \
- && mkdir -p /var/ssl \
+ && mkdir -p /var/ssl/private \
  && ${ZK_HOME}/zookeeper_certs.sh
 
 EXPOSE 22 2181 2281 2888 3888
