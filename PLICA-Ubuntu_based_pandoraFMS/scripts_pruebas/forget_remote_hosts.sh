@@ -7,6 +7,7 @@ kibana_id=$(docker ps -q --filter "name=kibana")
 spark_master_id=$(docker ps -q --filter "name=spark-master")
 spark_worker_id=$(docker ps -q --filter "name=plica_worker_1")
 elastalert_id=$(docker ps -q --filter "name=elastalert")
+elastalert_id=$(docker ps -q --filter "name=fuseki")
 
 kafka_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $kafka_id)
 zookeeper_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $zookeeper_id)
@@ -15,8 +16,9 @@ kibana_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}
 spark_master_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $spark_master_id)
 spark_worker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $spark_worker_id)
 elastalert_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $elastalert_id)
+fuseki_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $fuseki_id)
 
-declare -a ips=($kafka_ip $zookeeper_ip $elasticsearch_ip $kibana_ip $spark_master_ip $spark_worker_ip $elastalert_ip)
+declare -a ips=($kafka_ip $zookeeper_ip $elasticsearch_ip $kibana_ip $spark_master_ip $spark_worker_ip $elastalert_ip $fuseki_ip)
 
 for i in "${ips[@]}"
 do

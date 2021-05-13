@@ -1,0 +1,12 @@
+ANOMALIES.SV.CONFIG = ./config-files/AnomaliesConfigSV.txt
+ANOMALIES.BBDD.CONFIG = ./config-files/esConfig.txt
+STIX.ELEMENTS.CONFIG = ./config-files/ficheroJSONSTIX.json
+RISK.CALCULATION = ./config-files/riskConfig.txt
+ASSETS.CONFIG = ./config-files/assets_ejemplo.csv
+ASSET.VALUATION = ./config-files/asset_valuation.xml
+DATA.HISTORY = ./config-files/datos.json
+ONTOLOGY.FILE.ORIGINAL = ./config-files/cibersituational-ontov2-tmp.owl
+ONTOLOGY.FILE.TMP = ./config-files/cibersituational-ontov2-tmp-copia.owl
+ONTOLOGY.FILE.ASSETSAS = ./config-files/cibersituational-ontov2-tmp-copiaAssetsAS.owl
+ONTOLOGY.FILE.THREATRISK = ./config-files/cibersituational-ontov2-tmp-copiaATR.owl
+

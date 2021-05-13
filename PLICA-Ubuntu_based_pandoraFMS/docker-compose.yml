@@ -213,7 +213,35 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./Elastalert/configFiles/:/opt/config
       - ./Elastalert/rules:/opt/rules
-        
+  
+  fuseki:
+    build:
+      context: Fuseki/
+      args:  
+        FUSEKI_VERSION: ${FUSEKI_VERSION}
+    image: fuseki:${FUSEKI_VERSION}
+    container_name: fuseki
+    depends_on:
+      - elasticsearch
+      - kibana
+      - kafka
+      - zookeeper
+      - spark-master
+      - spark-base
+    environment:
+      FUSEKI_VERSION: ${FUSEKI_VERSION}
+      FUSEKI_IP: ${FUSEKI_IP}
+      ELASTICSEARCH_IP: ${ELASTICSEARCH_IP}
+      ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ELASTICSEARCH_INDEX: ${ELASTICSEARCH_INDEX}
+    ports:
+      - "3030:3030"
+      - "28:22"  
+    networks:
+      FUSEKI:
+        ipv4_address: 172.24.0.2      
 
 networks:
   KAFKA:
@@ -243,14 +271,21 @@ networks:
       driver: default 
       config:
         - subnet: 172.23.0.0/24
-          gateway: 172.23.0.1  
-  BASE:
+          gateway: 172.23.0.1
+  FUSEKI:
     driver: bridge
     ipam:
       driver: default 
       config:
         - subnet: 172.24.0.0/24
-          gateway: 172.24.0.1               
+          gateway: 172.24.0.1          
+  BASE:
+    driver: bridge
+    ipam:
+      driver: default 
+      config:
+        - subnet: 172.0.0.0/24
+          gateway: 172.0.0.1               
 volumes:
   kafka_config: 
   elasticsearch:
