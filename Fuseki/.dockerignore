@@ -1,0 +1,5 @@
+# Ignore
+*.md
+*.env
+*.yml
+Dockerfile

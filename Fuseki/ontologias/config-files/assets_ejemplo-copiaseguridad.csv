@@ -1,0 +1,17 @@
+"ACTIVOS";
+"[CD] ClassifiedData";
+;"[0] ClassifiedData";
+;;"100%";"[1] Software1";
+"[SW] Software";
+;"[1] Software1";
+;;"100%";"[2] Hardware1";
+"[U] Users";
+;"[3] Employee";
+"[N] Networks";
+;"[L] LAN";
+;;"100%";"[R] Router";
+"[HW] Hardware";
+;"[2] Hardware1";
+;;"100%";"[3] Employee";
+;;"100%";"[L] LAN";
+;"[R] Router";
