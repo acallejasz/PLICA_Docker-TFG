@@ -11,7 +11,7 @@ LABEL org.label-schema.name="fuseki" \
 COPY . /
 
 RUN apk --update upgrade \
-  && apk add --no-cache wget bash openssh openssh-server-pam \
+  && apk add --no-cache wget bash curl openssh openssh-server-pam \
   && ./enable_ssh.sh \
   && ./ontologias/fuseki_installation.sh \
   && ./ontologias/configuration.sh 

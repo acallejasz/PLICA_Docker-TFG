@@ -1,0 +1,93 @@
+[{"anomaly_threat":[
+	{"WiFi_Sensor_Anomaly":[
+		[7.0, 4.0, "DeliberatedUnauthorizedAccess"], 
+		[4.0, 4.0, "DataProtectionRisks"],
+		[4.0, 4.0, "DeliberatedInformationLeak"], 
+		[4.0, 4.0, "DeliberatedMaliciousSWDistribution"],
+		[4.0, 4.0, "SWVulnerabilities"]]},
+	{"RF_Sensor_Anomaly": [[4.0, 5.0, "DenialOfService"]]},
+	{"RM_Sensor_Anomaly": [
+		[6.5, 4.0, "DeliberatedUnauthorizedAccess"], 
+		[6.0, 4.0, "DenialOfService"],
+		[6.0, 4.0, "DeliberatedInformationLeak"]]},
+	{"Bluetooth_Sensor_Anomaly":[
+		[4.0, 7.0, "DeliberatedUnauthorizedAccess"], 
+		[6.0, 5.0, "DataProtectionRisks"], 
+		[4.0, 5.0, "DeliberatedInformationLeak"], 
+		[4.0, 3.0, "DenialOfService"]]},
+	{"Cybersecurity_Sensor_Anomaly": [
+		[3.0, 5.0, "DenialOfService"],
+		[5.0, 4.0, "DeliberatedConfigFilesTampering"],
+		[5.0, 4.0, "DeliberatedInformationDestruction"],
+		[5.0, 4.0, "DeliberatedInformationLeak"],
+		[5.0, 4.0, "DeliberatedInformationTampering"],
+		[5.0, 4.0, "DeliberatedMaliciousSWDistribution"],
+		[5.0, 4.0, "DeliberatedRegistersTampering"],
+		[5.0, 4.0, "DeliberatedSWTampering"],
+		[5.0, 4.0, "DeliberatedUnauthorizedAccess"],
+		[5.0, 4.0, "SWMaintenanceError"],
+		[5.0, 4.0, "SWVulnerabilities"],
+		[5.0, 4.0, "Untrustworthy"],
+		[5.0, 4.0, "NetworkOutage"]]},
+	{"IDS_Suricata_Anomaly": [
+		[3.0, 5.0, "DenialOfService"],
+		[5.0, 4.0, "DeliberatedConfigFilesTampering"],
+		[5.0, 4.0, "DeliberatedInformationDestruction"],
+		[5.0, 4.0, "DeliberatedInformationLeak"],
+		[5.0, 4.0, "DeliberatedInformationTampering"],
+		[5.0, 4.0, "DeliberatedMaliciousSWDistribution"],
+		[5.0, 4.0, "DeliberatedRegistersTampering"],
+		[5.0, 4.0, "DeliberatedSWTampering"],
+		[5.0, 4.0, "DeliberatedUnauthorizedAccess"],
+		[5.0, 4.0, "SWMaintenanceError"],
+		[5.0, 4.0, "SWVulnerabilities"],
+		[5.0, 4.0, "Untrustworthy"],
+		[5.0, 4.0, "NetworkOutage"]]},
+	{"Firewall_Anomaly": [
+		[3.0, 5.0, "DenialOfService"],
+		[5.0, 4.0, "DeliberatedConfigFilesTampering"],
+		[5.0, 4.0, "DeliberatedInformationDestruction"],
+		[5.0, 4.0, "DeliberatedInformationLeak"],
+		[5.0, 4.0, "DeliberatedInformationTampering"],
+		[5.0, 4.0, "DeliberatedMaliciousSWDistribution"],
+		[5.0, 4.0, "DeliberatedRegistersTampering"],
+		[5.0, 4.0, "DeliberatedSWTampering"],
+		[5.0, 4.0, "DeliberatedUnauthorizedAccess"],
+		[5.0, 4.0, "SWMaintenanceError"],
+		[5.0, 4.0, "SWVulnerabilities"],
+		[5.0, 4.0, "Untrustworthy"],
+		[5.0, 4.0, "NetworkOutage"]]},
+	{"SIEM_Sensor_Anomaly":[
+		[5.0, 5.0, "DenialOfService"],
+		[6.0, 4.0, "DeliberatedUnauthorizedAccess"]]}]},
+{"correlated_threat":[
+	[6.0, 8.0, "DenialOfService"],
+	[7.0,8.5, "SWVulnerabilities"]]},
+{"asset_threat":[
+	{"Networks":[[4.0, 3.0, "NetworkOutage"]]},
+	{"ClassifiedData":[
+		[3.0, 4.0, "DataProtectionRisks"],
+		[3.0, 4.0, "DeliberatedInformationDestruction"],
+		[3.0, 4.0, "NonIntentionalInformationDestruction"],
+		[3.0, 4.0, "NonIntentionalInformationTampering"],
+		[3.0, 4.0, "DeliberatedInformationLeak"],
+		[3.0, 4.0, "DeliberatedInformationTampering"],
+		[3.0, 4.0, "NonIntentionalInformationLeak"]]},
+	{"Software":[
+		[4.0, 4.0, "SWVulnerabilities"],
+		[4.0, 4.0, "NonIntentionalMaliciousSWDistribution"],
+		[4.0, 4.0, "DeliberatedMaliciousSWDistribution"],
+		[4.0, 4.0, "DeliberatedSWTampering"],
+		[4.0, 4.0, "SWMaintenanceError"]]},
+	{"Hardware":[
+		[2.0, 5.0, "DeliberatedHWTampering"],
+		[2.0, 5.0, "HWMaintenanceError"],
+		[2.0, 5.0, "PhysicalFault"],
+		[2.0, 5.0, "PowerOutage"]]},
+	{"Users":[
+		[2.0, 3.0, "IdentityThief"],
+		[2.0, 3.0, "NonIntentionalUserError"],
+		[2.0, 3.0, "UsersComplaints"],
+		[2.0, 3.0, "SocialEngineering"]]}
+]}
+]

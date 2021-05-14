@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Instalar servidor
+
 cd ontologias
 wget https://archive.apache.org/dist/jena/binaries//apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz
 tar -xzvf apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz
@@ -12,6 +13,7 @@ echo "- - - - - - - - - - - - - - - - - - - - - - - - "
 echo ""
 
 # Configurar servidor
+
 cd apache-jena-fuseki-${FUSEKI_VERSION}
 bash ./fuseki-server &
 echo  "Configurando Fuseki ..."

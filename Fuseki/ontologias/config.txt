@@ -9,4 +9,4 @@ ONTOLOGY.FILE.ORIGINAL = ./config-files/cibersituational-ontov2-tmp.owl
 ONTOLOGY.FILE.TMP = ./config-files/cibersituational-ontov2-tmp-copia.owl
 ONTOLOGY.FILE.ASSETSAS = ./config-files/cibersituational-ontov2-tmp-copiaAssetsAS.owl
 ONTOLOGY.FILE.THREATRISK = ./config-files/cibersituational-ontov2-tmp-copiaATR.owl
-
+ONTOLOGY.ELEMENTS.RULES = ./config-files/rules.json
