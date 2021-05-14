@@ -6,9 +6,11 @@ services:
       context: elasticsearch/
       args:
         EK_VERSION: ${EK_VERSION}
+        ELASTIC_CREDENTIALS: ${ELASTIC_CREDENTIALS}
     image: elasticsearch:${EK_VERSION}
     container_name: elasticsearch    
     environment:
+      ELASTIC_CREDENTIALS: ${ELASTIC_CREDENTIALS}
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       ELASTIC_CLUSTER_NAME: ${ELASTIC_CLUSTER_NAME}
