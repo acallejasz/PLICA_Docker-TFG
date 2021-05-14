@@ -4,7 +4,7 @@
 
 # Repositorio para la dockerización y migración de PLICA
 
-Versión: 24 de Abril de 2021
+Versión: 14 de Mayo de 2021
 
 ## Título
 
@@ -20,12 +20,13 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
   - Directorio Elasticsearch-Kibana, que contiene el docker-compose para levantar Elasticsearch y la interfaz visual de Kibana.
   - Directorio Kafka-ZooKeeper y Kafka-ZooKeeperSSL, que contienen los dockerfile y docker-compose necesarios para levantar Apache Kafka y Zookeper sin/con SSL.
   - Directorio Spark-Hadoop, que contiene los dockerfile y docker-compose para levantar Apache Spark, permitiendo su clusterización y despliegue escalable de workers.
+  - Directorio Fuseki, que contiene el dockerfile y docker-compose para levantar Fuseki, así como otros archivos necesarios para su funcionamiento.
   - Directorio PLICA-Ubuntu_based_PandoraFMS, con todo el proyecto pero basado en Ubuntu y con PandoraFMS corriendo en los contenedores.
   - Directorio scripts_pruebas, que contiene todos los archivos necesarios para crear topics, productores, las tramas a enviar, ejecutar servicio en Spark y olvidar EDCAS.
   
 ## Arranque del servicio global
 
-Sobre el directorio descargado realizar: docker-compose up --scale spark-base=0. Recordar que habría que meter en la carpeta PLICAv6, que esta en la ruta /TFG/Spark-Hadoop/base/, todos los archivos que faltan. Utilizar la carpeta normal del proyecto y meterla en dicha ruta y sustituir lo archivos /PLICAv6/XXXX/StructuredStreaming/DistanceKMeans/structuredXX.py por los del repositorio.
+Sobre el directorio descargado realizar: docker-compose up --scale spark-base=0. Recordar que habría que meter en la carpeta PLICAv6, que esta en la ruta /TFG/Spark-Hadoop/base/, todos los archivos que faltan. Utilizar la carpeta normal del proyecto PLICA para Spark y meterla en dicha ruta y sustituir lo archivos /PLICAv6/XXXX/StructuredStreaming/DistanceKMeans/structuredXX.py por los del repositorio. Además, es necesario añadir en la parte de ontologías de Fuseki el .jar de PLICA, ya que no se incluye en este repositorio.
 
 ## Kafka + Zookeper (SSL)
 
@@ -45,7 +46,11 @@ Usar el docker-compose.yml con --scale spark-base=0 (Se necesita construir la im
 
 Basta con arrancar el docker-compose global. Si se quiere probar individualmente con su docker-compose recordar eliminar el sleep y tener siempre levantado el contenedor de Elasticsearch.
 
+## Fuseki
+
+Basta con arrancar el docker-compose global. Si se quiere probar individualmente con su docker-compose recordar eliminar el sleep y tener siempre levantado el contenedor de Elasticsearch. Apunte importante: El servicio del .jar (que no el incio del servidor) estará en un bucle while infinito hasta que todos los indices que esten indicados en el .env en EASTICSEARCH_INDEX sean creados en Elasticsearch, para evitar así errores al intentar buscar o trabajar sobre estos.
+
 ## Otras caracteristicas
 
   - Se encuentra habilitado el acceso por ssh a todos los contenedores, excepto a los de Elasticsearch y Kibana.
-  - Se dispone de PandoraFMS en las imagenes basadas en Ubuntu, excepto a los de Elasticsearch y Kibana.
+  - Se dispone de PandoraFMS en las imagenes basadas en Ubuntu, excepto en las de Elasticsearch y Kibana.
