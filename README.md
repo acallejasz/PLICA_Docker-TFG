@@ -48,7 +48,7 @@ Basta con arrancar el docker-compose global. Si se quiere probar individualmente
 
 ## Fuseki
 
-Basta con arrancar el docker-compose global. Si se quiere probar individualmente con su docker-compose recordar eliminar el sleep y tener siempre levantado el contenedor de Elasticsearch. Apunte importante: El servicio del .jar (que no el incio del servidor) estará en un bucle while infinito hasta que todos los indices que esten indicados en el .env en EASTICSEARCH_INDEX sean creados en Elasticsearch, para evitar así errores al intentar buscar o trabajar sobre estos.
+Basta con arrancar el docker-compose global. Si se quiere probar individualmente con su docker-compose recordar eliminar el sleep y tener siempre levantado el contenedor de Elasticsearch. Apunte importante: El servicio del .jar (que no el incio del servidor) estará en un bucle while infinito hasta que todos los indices que esten indicados en el .env en ELASTICSEARCH_INDEX sean creados en Elasticsearch, para evitar así errores al intentar buscar o trabajar sobre estos.
 
 ## Otras caracteristicas
 
