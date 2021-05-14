@@ -42,7 +42,6 @@ services:
       KAFKA_HOME: ${KAFKA_HOME}
     ports:
       - "9092:9092"
-      - "24:22"
     networks:
       KAFKA:
         ipv4_address: 172.20.0.2
@@ -57,9 +56,11 @@ services:
       context: Elasticsearch-Kibana/elasticsearch/
       args:
         EK_VERSION: ${EK_VERSION}
+        ELASTIC_CREDENTIALS: ${ELASTIC_CREDENTIALS}
     image: elasticsearch:${EK_VERSION}
     container_name: elasticsearch    
     environment:
+      ELASTIC_CREDENTIALS: ${ELASTIC_CREDENTIALS}
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       ELASTIC_CLUSTER_NAME: ${ELASTIC_CLUSTER_NAME}

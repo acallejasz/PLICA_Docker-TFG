@@ -6,7 +6,7 @@ network.host: 0.0.0.0
 xpack.license.self_generated.type: basic
 
 ## Security
-xpack.security.enabled: true
+xpack.security.enabled: ${ELASTIC_CREDENTIALS}
 
 ## Monitoring
 xpack.monitoring.collection.enabled: true

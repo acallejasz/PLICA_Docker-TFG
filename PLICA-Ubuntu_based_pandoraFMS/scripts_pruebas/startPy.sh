@@ -32,7 +32,7 @@ fi
 
 
 if [ "$1" == "wifi" ] || [ "$1" == "bluetooth" ] || [ "$1" == "fw" ] || [ "$1" == "rf" ] || [ "$1" == "rm" ] || [ "$1" == "siem" ]; then
-	docker exec -itd ${spark_master} /bin/sh /template.sh $1
+	docker exec -itd ${spark_master} /bin/bash ./template.sh $1
 else
 	echo
 	echo -n "Unknown task - Try one: wifi-bluetooth-fw-rf-rm-siem"

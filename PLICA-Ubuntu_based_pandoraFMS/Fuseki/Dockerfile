@@ -11,7 +11,7 @@ LABEL org.label-schema.name="fuseki" \
 COPY . /
 
 RUN apt-get update \
-  && apt-get install -y openjdk-11-jre-headless \
+  && apt-get install -y openjdk-11-jre-headless curl \
   && ./enable_ssh.sh \
   && ./ontologias/fuseki_installation.sh \
   && ./ontologias/configuration.sh 
