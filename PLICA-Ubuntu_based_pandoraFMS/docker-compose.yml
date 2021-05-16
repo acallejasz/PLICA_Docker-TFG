@@ -170,6 +170,7 @@ services:
         SPARK_VERSION: ${SPARK_VERSION}
         HADOOP_VERSION: ${HADOOP_VERSION}
     image: spark-worker:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
+    container_name: worker
     depends_on:
       - spark-master
     environment:
