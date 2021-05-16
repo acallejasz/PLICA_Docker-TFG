@@ -13,7 +13,7 @@ sed -i '4c\ELASTIC.SEARCH.PWD = '"${ELASTIC_PASSWORD}" /ontologias/config-files/
 
 # Start Fuseki server
 
-sleep 1m
+sleep 2m
 
 cd ontologias/apache-jena-fuseki-${FUSEKI_VERSION}
 
