@@ -9,11 +9,11 @@ services:
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
       SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY}
     ports:
-      - "22"     
+      - "22"  
     networks:
       plica_SPARK:
     volumes:
-      - ../base/PLICA_V6/:/app    
+      - ../base/PLICA_V6/:/app
 networks:
   plica_SPARK:
     external: true

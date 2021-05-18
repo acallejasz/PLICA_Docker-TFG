@@ -11,43 +11,82 @@ services:
 
   zookeeper:
     build: 
-      context: Kafka-ZooKeeper/zookeeper/
+      context: Kafka-ZooKeeperSSL/zookeeper/
       args:
         ZOOKEEPER_VERSION: ${ZOOKEEPER_VERSION}
         ZK_HOME: ${ZK_HOME}
+        ZOOKEEPER_KEYSTORE_FILENAME: ${ZOOKEEPER_KEYSTORE_FILENAME}
+        ZOOKEEPER_TRUSTSTORE_FILENAME: ${ZOOKEEPER_TRUSTSTORE_FILENAME}
+        ZOOKEEPER_STORE_WORKING_DIRECTORY: ${ZOOKEEPER_STORE_WORKING_DIRECTORY}
+        ZOOKEEPER_IP: ${ZOOKEEPER_IP}
+        ZOOKEEPER_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_TRUSTSTORE_PASSWORD}
     image: zookeeper:${ZOOKEEPER_VERSION}
     container_name: zookeeper
+    environment:
+      ZK_HOME: ${ZK_HOME}
+      ZOOKEEPER_IP: ${ZOOKEEPER_IP}
+      ZOOKEEPER_SECURE_PORT: ${ZOOKEEPER_SECURE_PORT}
+      ZOOKEEPER_KEYSTORE_LOCATION: ${ZOOKEEPER_KEYSTORE_LOCATION}
+      ZOOKEEPER_KEYSTORE_PASSWORD: ${ZOOKEEPER_KEYSTORE_PASSWORD}
+      ZOOKEEPER_TRUSTSTORE_LOCATION: ${ZOOKEEPER_TRUSTSTORE_LOCATION}
+      ZOOKEEPER_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_TRUSTSTORE_PASSWORD}
     ports:
       - "2181:2181"
+      - "2281:2281"
       - "23:22"
     networks:
       KAFKA:
         ipv4_address: 172.20.0.11
+    volumes:
+      - certs_zookeeper:/var/ssl/private/zookeeper     
 
   kafka:
     build: 
-      context: Kafka-ZooKeeper/kafka/
+      context: Kafka-ZooKeeperSSL/kafka/
       args:
         KAFKA_VERSION: ${KAFKA_VERSION}
         SCALA_VERSION: ${SCALA_VERSION}
         GLIBC_VERSION: ${GLIBC_VERSION}
         KAFKA_HOME: ${KAFKA_HOME}
+        KAFKA_ADVERTISED_HOST_NAME: ${KAFKA_ADVERTISED_HOST_NAME}
+        KAFKA_KEYSTORE_FILENAME: ${KAFKA_KEYSTORE_FILENAME}
+        KAFKA_KEYSTORE_CLIENT_FILENAME: ${KAFKA_KEYSTORE_CLIENT_FILENAME}
+        KAFKA_TRUSTSTORE_FILENAME: ${KAFKA_TRUSTSTORE_FILENAME}
+        KAFKA_CLIENT_TRUSTSTORE_FILENAME: ${KAFKA_CLIENT_TRUSTSTORE_FILENAME}
+        KAFKA_STORE_WORKING_DIRECTORY: ${KAFKA_STORE_WORKING_DIRECTORY}
+        KAFKA_TRUSTSTORE_PASSWORD: ${KAFKA_TRUSTSTORE_PASSWORD}
+        BROKERS_NUMBER: ${BROKERS_NUMBER}
     image: kafka:${KAFKA_VERSION}
     container_name: kafka
     environment:
       KAFKA_ADVERTISED_HOST_NAME: ${KAFKA_ADVERTISED_HOST_NAME}
-      KAFKA_ZOOKEEPER_CONNECT: ${KAFKA_ZOOKEEPER_CONNECT}
-      KAFKA_ADVERTISED_PORT: ${KAFKA_ADVERTISED_PORT}
-      KAFKA_PORT: ${KAFKA_PORT}
+      KAFKA_ZOOKEEPER_CONNECT: ${KAFKA_ZOOKEEPER_SECURE_CONNECT}
+      KAFKA_ADVERTISED_PORT: ${KAFKA_SECURE_PORT}
+      KAFKA_SECURE_PORT: ${KAFKA_SECURE_PORT}
       KAFKA_HOME: ${KAFKA_HOME}
+      BROKERS_NUMBER: ${BROKERS_NUMBER}
+      KAFKA_KEYSTORE_LOCATION: ${KAFKA_KEYSTORE_LOCATION}
+      KAFKA_KEYSTORE_PASSWORD: ${KAFKA_KEYSTORE_PASSWORD}
+      KAFKA_TRUSTSTORE_LOCATION: ${KAFKA_TRUSTSTORE_LOCATION}
+      KAFKA_TRUSTSTORE_PASSWORD: ${KAFKA_TRUSTSTORE_PASSWORD}
+      KAFKA_KEYSTORE_CLIENT_FILENAME: ${KAFKA_KEYSTORE_CLIENT_FILENAME}
+      KAFKA_CLIENT_TRUSTSTORE_FILENAME: ${KAFKA_CLIENT_TRUSTSTORE_FILENAME}
+      KAFKA_STORE_WORKING_DIRECTORY: ${KAFKA_STORE_WORKING_DIRECTORY}
+      ZOOKEEPER_KEYSTORE_LOCATION: ${ZOOKEEPER_KEYSTORE_LOCATION}
+      ZOOKEEPER_KEYSTORE_PASSWORD: ${ZOOKEEPER_KEYSTORE_PASSWORD}
+      ZOOKEEPER_TRUSTSTORE_LOCATION: ${ZOOKEEPER_TRUSTSTORE_LOCATION}
+      ZOOKEEPER_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_TRUSTSTORE_PASSWORD}
     ports:
       - "9092:9092"
+      - "9093:9093"
     networks:
       KAFKA:
         ipv4_address: 172.20.0.2
     depends_on: 
       - zookeeper
     volumes:
+      - certs_zookeeper:/var/ssl/private/zookeeper
+      - certs_kafka:/var/ssl/private/kafka
       - kafka_config:/opt/kafka/config
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -125,7 +164,7 @@ services:
       SPARK_MASTER_PORT: ${SPARK_MASTER_PORT}
       SPARK_SUBMIT_ARGS: ${SPARK_SUBMIT_ARGS}
       #Kafka
-      KAFKA_BROKER: ${KAFKA_BROKER}
+      KAFKA_BROKER: ${KAFKA_SECURE_BROKER}
       WF_TOPIC: ${WF_TOPIC}
       BT_TOPIC: ${BT_TOPIC}
       FW_TOPIC: ${FW_TOPIC}
@@ -137,6 +176,11 @@ services:
       ELASTICSEARCH_PORT: ${ELASTICSEARCH_PORT}
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      #Security
+      KEYSTORE: ${KEYSTORE}
+      TRUSTSTORE: ${TRUSTSTORE}
+      KEY: ${KEY}
+      PASSWORD: ${PASSWORD}
       #Python
         #Files
       SPARK_APPLICATION_PYTHON_LOCATION_WF: ${SPARK_APPLICATION_PYTHON_LOCATION_WF}
@@ -161,6 +205,7 @@ services:
         ipv4_address: 172.22.0.2
     volumes:
       - spark_logs:/logs 
+      - certs_kafka:/app/certificados_kafka
       - ./Spark-Hadoop/base/PLICA_V6/:/app  
 
   worker:
@@ -179,12 +224,18 @@ services:
       SPARK_WORKER_LOG: ${SPARK_WORKER_LOG} 
       SPARK_WORKER_CORES: ${SPARK_WORKER_CORES} 
       SPARK_WORKER_MEMORY: ${SPARK_WORKER_MEMORY}
+      #Security
+      KEYSTORE: ${KEYSTORE}
+      TRUSTSTORE: ${TRUSTSTORE}
+      KEY: ${KEY}
+      PASSWORD: ${PASSWORD}
     ports:
       - "26:22" 
     networks:
       SPARK:
     volumes:
-      - ./Spark-Hadoop/base/PLICA_V6/:/app     
+      - ./Spark-Hadoop/base/PLICA_V6/:/app
+      - certs_kafka:/app/certificados_kafka     
 
   elastalert:
     build:
@@ -289,6 +340,8 @@ networks:
         - subnet: 172.0.0.0/24
           gateway: 172.0.0.1               
 volumes:
+  certs_zookeeper: 
+  certs_kafka:
   kafka_config: 
   elasticsearch:
   spark_logs: 
