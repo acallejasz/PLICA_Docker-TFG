@@ -35,6 +35,10 @@ APP_NAME = "BT-SparkStreaming.py"
 PREDICTION_TOPIC = sys.argv[2]
 PERIOD = 10
 BROKERS = sys.argv[1]
+KEYSTORE = sys.argv[7]
+TRUSTSTORE = sys.argv[8]
+KEY = sys.argv[9]
+PASSWORD = sys.argv[10]
 base_path = '/app/bluetooth/StructuredStreaming/DistanceKMeans'
 threshold = np.load(f'{base_path}/data/thresholdBt.npy',allow_pickle=True)
 limit = 0
@@ -43,7 +47,25 @@ conf = SparkConf().setAppName(f"{APP_NAME}")
 sc = SparkContext(conf=conf)
 spark = SparkSession(sc)
 spark.conf.set("spark.sql.session.timeZone", "Europe/Madrid")
-lines = spark.readStream.format("kafka").option("kafka.bootstrap.servers", BROKERS).option("subscribe", PREDICTION_TOPIC).option("failOnDataLoss", "false").load()
+
+# KAFKA-SPARK Without SSL config
+
+#lines = spark.readStream.format("kafka").option("kafka.bootstrap.servers", BROKERS).option("subscribe", PREDICTION_TOPIC).option("failOnDataLoss", "false").load()
+
+# KAFKA-SPARK With SSL config
+
+lines = spark.readStream.format("kafka") \
+        .option("kafka.bootstrap.servers", BROKERS) \
+        .option("subscribe", PREDICTION_TOPIC) \
+        .option("failOnDataLoss", "false") \
+        .option("kafka.security.protocol", "SSL") \
+        .option("kafka.ssl.truststore.location", TRUSTSTORE) \
+        .option("kafka.ssl.truststore.password", PASSWORD) \
+        .option("kafka.ssl.keystore.location", KEYSTORE) \
+        .option("kafka.ssl.keystore.password", PASSWORD) \
+        .option("kafka.ssl.key.location", KEY) \
+        .option("kafka.ssl.endpoint.identification.algorithm", "") \
+        .option("kafka.ssl.key.password", PASSWORD).load()          
 
 # Funciones 
 
