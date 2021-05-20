@@ -38,7 +38,8 @@ RUN apt-get update \
  && ln -s /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION} ${KAFKA_HOME} \
  && mv /tmp/consumer_ssl.properties /tmp/producer_ssl.properties ${KAFKA_HOME}/config \
  && mkdir -p /var/ssl/private \
- && /usr/bin/kafka_certs.sh 
+ && /usr/bin/kafka_certs.sh \
+ && dpkg -i /pandoraAgents/pandorafms.agent_unix_kafka.deb
 
 COPY overrides /opt/overrides
 

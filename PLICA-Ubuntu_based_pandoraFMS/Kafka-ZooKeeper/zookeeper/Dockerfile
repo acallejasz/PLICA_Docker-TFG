@@ -24,7 +24,8 @@ RUN apt-get update \
  && mv ${ZK_HOME}/zoo.cfg ${ZK_HOME}/conf/zoo.cfg \
  && mv ${ZK_HOME}/zkServer.sh ${ZK_HOME}/bin/zkServer.sh \
  && mkdir -p /tmp/zookeeper \
- &&	mkdir ${ZK_HOME}/data
+ &&	mkdir ${ZK_HOME}/data \
+ && dpkg -i /pandoraAgents/pandorafms.agent_unix_zookeeper.deb
 
 EXPOSE 22 2181 2281 2888 3888
 

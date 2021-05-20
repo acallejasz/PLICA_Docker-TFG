@@ -34,7 +34,8 @@ RUN apt-get update \
  && mkdir -p /tmp/zookeeper \
  &&	mkdir ${ZK_HOME}/data \
  && mkdir -p /var/ssl/private \
- && ${ZK_HOME}/zookeeper_certs.sh
+ && ${ZK_HOME}/zookeeper_certs.sh \
+ && dpkg -i /pandoraAgents/pandorafms.agent_unix_zookeeper.deb
 
 EXPOSE 22 2181 2281 2888 3888
 

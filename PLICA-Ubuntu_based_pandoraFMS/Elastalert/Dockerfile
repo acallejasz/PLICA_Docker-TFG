@@ -14,7 +14,8 @@ LABEL org.label-schema.name="elastalert" \
 RUN apt-get update \
   && apt-get install -y bash docker openjdk-11-jre-headless python python3 python3-dev  python3-pip libcurl3-nss libc6 make gcc g++ python3-dev libssl-dev libmagic-dev cargo jq \
   && rm -rf /var/cache/apk/* \
-  && pip3 install elastalert==${ELASTALERT_VERSION} 
+  && pip3 install elastalert==${ELASTALERT_VERSION} \
+  && dpkg -i /pandoraAgents/pandorafms.agent_unix_correlacion.deb
 
 COPY start_elastalert.sh /
 

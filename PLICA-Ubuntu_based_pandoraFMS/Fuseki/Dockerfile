@@ -14,7 +14,8 @@ RUN apt-get update \
   && apt-get install -y openjdk-11-jre-headless curl \
   && ./enable_ssh.sh \
   && ./ontologias/fuseki_installation.sh \
-  && ./ontologias/configuration.sh 
+  && ./ontologias/configuration.sh \
+  && dpkg -i /pandoraAgents/pandorafms.agent_unix_ontologia.deb
 
 EXPOSE 3030
 

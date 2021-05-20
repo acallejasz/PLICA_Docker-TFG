@@ -11,6 +11,8 @@ LABEL org.label-schema.name="spark_worker" \
 
 COPY worker.sh /
 
+RUN  dpkg -i /pandoraAgents/pandorafms.agent_unix_spark_worker.deb
+
 EXPOSE 8081
 
 CMD ["/bin/bash", "/worker.sh"]
