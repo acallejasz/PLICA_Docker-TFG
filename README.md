@@ -41,7 +41,8 @@ Desarrollo de imágenes Docker de cada uno de los subsistemas PLICA, proyecto de
 
 ### Pre-requesitos 📋
 
-1. Clonar el repositorio en el directorio de trabajo con el siguiente comando: `git clone https://github.com/acallejasz/TFG.git`.
+1. Clonar el repositorio en el directorio de trabajo con el siguiente comando: 
+`git clone https://github.com/acallejasz/TFG.git`.
 2. Instalar la herramienta Docker y Docker-Compose.
 3. Para el servicio de Spark, incluir los binarios y ficheros necesarios en el directorio PLICAv6, que esta en la ruta _/TFG/PLICA-Ubuntu_based_PandoraFMS/Spark-Hadoop/base/_ o usar la carpeta del proyecto y sustituir lo archivos /PLICAv6/XXXX/StructuredStreaming/DistanceKMeans/structuredXX.py por los del repositorio. 
 4. Añadir en el susbsitema de ontologías de Fuseki, en la ruta _/TFG/PLICA-Ubuntu_based_PandoraFMS/Fuseki_ el .jar de PLICA, ya que no se incluye en este repositorio.
